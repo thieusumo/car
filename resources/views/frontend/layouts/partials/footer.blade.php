@@ -1,5 +1,5 @@
 <!-- footer -->
-    <footer class="py-5">
+    {{-- <footer class="py-5">
         <div class="container py-xl-4 py-lg-3">
             <div class="row footer-grids">
                 <div class="col-lg-2 col-6 footer-grid">
@@ -73,10 +73,10 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> --}}
     <!-- //footer -->
     <!-- copyright -->
-    <div class="copyright-w3ls py-4">
+    <div class="copyright-w3ls py-1">
         <div class="container">
             <div class="row">
                 <!-- copyright -->

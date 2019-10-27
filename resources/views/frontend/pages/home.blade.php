@@ -4,8 +4,8 @@
     <div class="main-w3pvt mian-content-wthree text-center" id="home">
         <div class="container">
             <div class="style-banner mx-auto">
-                <h3 class="text-wh font-weight-bold">Search and Find Your <span>Luxury</span> Homes</h3>
-                <p class="mt-2 text-li" id="find">Property for sale & for rent around the world</p>
+                <h3 class="text-wh font-weight-bold">Tìm Kiếm <span>Xe Khách</span></h3>
+                <p class="mt-2 text-li" id="find">theo tuyến, chiều đi và thời gian xuất bến</p>
             </div>
         </div>
         {{--include search bar --}}
@@ -14,7 +14,7 @@
     </div>
     <!-- //banner -->
     <!-- banner bottom -->
-    <section class="w3ls-bnrbtm py-5" id="about">
+    {{-- <section class="w3ls-bnrbtm py-5" id="about">
         <div class="container py-xl-5 py-lg-3">
             <h3 class="title-w3 mb-md-5 mb-4 text-center text-bl font-weight-bold">Welcome To Our <span>Land
                     Site</span></h3>
@@ -35,10 +35,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- //banner bottom -->
 
-    <!-- services -->
+    {{-- <!-- services -->
     <div class="w3pvtits-services py-5" id="services">
         <div class="container py-xl-5 py-lg-3">
             <h3 class="title-w3 mb-2 text-center text-wh font-weight-bold">We Provide The <span>Best Services</span>
@@ -370,6 +370,6 @@
         </div>
         <img src="{{ asset('web/images/img2.png') }}" alt="" class="img-fluid img-podi-w3ls">
     </div>
-    <!-- //apps -->
+    <!-- //apps --> --}}
 
 @endsection

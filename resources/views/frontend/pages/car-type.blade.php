@@ -38,7 +38,7 @@
 					<td>data</td>
 					<td>data</td>
 					<td class="text-center">
-						<a href="{{ route('chi-tiet.show',1) }}" title="">
+						<a href="{{ route('chi-tiet.show','ngoc-han') }}" title="">
 							<button class="btn btn-sm btn-info" type="button">Xem</button>
 						</a>
 					</td>
