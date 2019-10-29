@@ -2,10 +2,6 @@
 
 Auth::routes();
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/home', 'HomeController@index')->name('admin.home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -23,4 +19,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+});
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('car', 'CarController', ['except' => ['show']]);
+	Route::group(['prefix' => 'car'], function () {
+		Route::get('/import','CarController@import')->name('car.import');
+		Route::get('/datatable','CarController@datatable')->name('car.datatable');
+	});
+
 });

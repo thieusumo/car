@@ -203,4 +203,5 @@
         </script>
         @stack('js')
     </body>
+    @yeild('js')
 </html>
