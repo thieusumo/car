@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Car;
 use Excel;
 use DataTables;
+use DB;
+use Response;
 
 class CarController extends Controller
 {
@@ -93,7 +95,18 @@ class CarController extends Controller
         return DataTables::of($car_list)
             ->make(true);
     }
-    public function import(){
+    public function getDownload()
+    {
+        //PDF file is stored under project/public/download/info.pdf
+        $file= public_path(). "/file/template-car.xlsx";
+
+        $headers = array(
+                  'Content-Type: application/pdf',
+                );
+
+        return Response::download($file, 'template-car.xlsx', $headers);
+    }
+    public function import(Request $request){
          if($request->hasFile('file')){
             $path = $request->file('file')->getRealPath();
             $begin_row = $request->begin_row;
@@ -101,86 +114,58 @@ class CarController extends Controller
             $update_exist = $request->check_update_exist;
             $update_count = 0;
             $insert_count = 0;
-            DB::beginTransaction();
+
             try {
-                $data = \Excel::load($path)->get();
+                $data = Excel::load($path)->get();
                 // dd($data);
                 if($data->count()){
+
                     $count = $data->count();
+                    $car_arr = [];
+
                     foreach ($data as $key => $value) {
                         if($key>= $begin_row && $key <= $end_row){
-                            //CHECK EXIST CUSTOMER
-                            $check_exist = PosCustomer::where('customer_place_id',$this->getCurrentPlaceId())
-                                            ->where('customer_phone', $value->customer_phone)->first();
-                             
-                            if(isset($check_exist)){
-                                // echo 0;
-                                if($update_exist =="on"){
-                                    // return "update";
-                                    $customertag = PosCustomertag::where('customertag_place_id',$this->getCurrentPlaceId())
-                                                        ->where('customertag_name',$value->customertag_name)->first();
 
-                                    $check_id= PosCustomer::where('customer_phone', $value->customer_phone)->first()->customer_id;
-                                    $pos_cus=PosCustomer::where('customer_place_id',$this->getCurrentPlaceId())
-                                            ->where('customer_phone', $value->customer_phone)
-                                            ->where('customer_id',$check_id)
-                                            ->update(['customer_customertag_id'=>$customertag->customertag_id , 
-                                                'customer_fullname'=>$value->customer_fullname,
-                                                'customer_gender'=>$value->customer_gender,
-                                                'customer_phone'=>$value->customer_phone,
-                                                'customer_country_code'=>$value->customer_country_code,
-                                                'customer_email'=>$value->customer_email,
-                                                'customer_birthdate'=>format_date_db($value->customer_birthdate),
-                                                'customer_address'=>$value->customer_address
-                                    ]);
-                                    $update_count++;
+                            $check_count = Car::where([['name',$value->name],['route_id',$value->route_id]])->count();
 
-                                    // dd($pos_cus);
-                                            
-                                }
-                            }
-                            else
-                            {
-                                $customertag = PosCustomertag::where('customertag_place_id',$this->getCurrentPlaceId())
-                                                        ->where('customertag_name',$value->customertag_name)->first();
-                                                        // dd($customertag);
-                                $idCustomer = PosCustomer::where('customer_place_id','=',$this->getCurrentPlaceId())->max('customer_id') +1;
-                                $PosCustomer = new PosCustomer();
-                                $PosCustomer->customer_id = $idCustomer;
-                                $PosCustomer->customer_place_id = $this->getCurrentPlaceId();
-                                $PosCustomer->customer_customertag_id = $customertag->customertag_id;
-                                $PosCustomer->customer_fullname = $value->customer_fullname;
-                                $PosCustomer->customer_gender = $value->customer_gender;
-                                $PosCustomer->customer_phone = $value->customer_phone;
-                                $PosCustomer->customer_country_code = $value->customer_country_code;
-                                $PosCustomer->customer_email = $value->customer_email;
-                                $PosCustomer->customer_birthdate = format_date_db($value->customer_birthdate);
-                                $PosCustomer->customer_address = $value->customer_address;
-                                $PosCustomer->save();
+                            if($check_count == 0){
+                                $car_arr[] = [
+                                    'name' => $value->name,
+                                    'slug'=> str_slug($value->name),
+                                    'station_go' => $value->station_go,
+                                    'station_back' => $value->station_back,
+                                    'station_back' => $value->station_back,
+                                    'time_go' => $value->time_go,
+                                    'time_back' => $value->time_back,
+                                    'route_id' => $value->route_id,
+                                    'line' => $value->line,
+                                    'phone' => $value->phone,
+                                    'address' => $value->address,
+                                    'active' => 1,
+                                ];
+
                                 $insert_count++;
                             }
+                                
                         }    
                     }
-                    DB::commit();
-                    $request->session()->flash('message', 'Import File Success , updated:'.$update_count.' row, inserted:'.$insert_count.' row');
-                    return back();
+                    $car_insert = Car::insert($car_arr);
+                    if(!isset($car_insert))
+                        return responseError();
+                    else
+                        return responseSuccess();
 
                 }
                 else{
-                    $request->session()->flash('error', 'Import File Not Data');
-                    return back();
+                    return response(['status'=>'error','message'=>'Empty File!']);
                 }
             } catch (\Exception $e) {
-               // dd(1);
-                DB::rollback();
-                $request->session()->flash('error', 'Import File is Error! Please check import file again!');
-                return back();
+                return responseError();
             }
 
         }
         else{
-            $request->session()->flash('error', 'Please choose file import.');
-            return back();
+            return responseError();
         }
     }
 }

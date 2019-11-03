@@ -24,8 +24,9 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
 	Route::resource('car', 'CarController', ['except' => ['show']]);
 	Route::group(['prefix' => 'car'], function () {
-		Route::get('/import','CarController@import')->name('car.import');
+		Route::post('/import','CarController@import')->name('car.import');
 		Route::get('/datatable','CarController@datatable')->name('car.datatable');
+		Route::get('/down-template','CarController@getDownload')->name('car.down-template');
 	});
 
 });
