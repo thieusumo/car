@@ -608,7 +608,7 @@ h3.title-w3 {
 }
 
 h3.title-w3 span {
-    color: #ff6b6b;
+    color: yellow;
 }
 
 h3.title-sub {
@@ -625,7 +625,7 @@ h3.title-sub span {
 
 /* services */
 #services {
-    background: url(../images/bg1.jpg) center no-repeat fixed;
+    background: url(../images/bn.jpg) no-repeat top;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -736,7 +736,7 @@ a.service-btn:hover {
 
 /* testimonials */
 .clients {
-    background: url(../images/bg2.jpg) no-repeat center fixed;
+    background: url(../images/bn.jpg) no-repeat top;
     background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
@@ -980,7 +980,7 @@ ul.apps-lists li a.active span {
 /* contact */
 
 .contact {
-    background: url(../images/bg4.jpg) no-repeat 0px 0px;
+    background: url(../images/bn.jpg) no-repeat top;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -992,7 +992,7 @@ ul.apps-lists li a.active span {
 .contact_grid_right input[type="email"],
 .contact_grid_right textarea {
     outline: none;
-    padding: 15px 15px;
+    padding: 10px 10px;
     font-size: 14px;
     color: #000;
     background: #fff;
@@ -1002,27 +1002,27 @@ ul.apps-lists li a.active span {
     -o-border-radius: 0px;
     -ms-border-radius: 0px;
     -moz-border-radius: 0px;
-    border-radius: 0px;
+    border-radius: 10px;
 }
 
 .contact_grid_right textarea {
-    min-height: 110px;
+    min-height: 100px;
     resize: none;
     width: 100%;
 }
 
 .contact_grid_right button {
     outline: none;
-    padding: 15px;
+    padding: 10px;
     font-size: 14px;
     color: #fff;
-    background: #ff6b6b;
+    background: #edf247;
     border: none;
     -webkit-border-radius: 0px;
     -o-border-radius: 0px;
     -ms-border-radius: 0px;
     -moz-border-radius: 0px;
-    border-radius: 0px;
+    border-radius: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
     -webkit-transition: 0.5s all;
@@ -1115,7 +1115,7 @@ p.copy-right-grids a {
 
 /* inner banner */
 .inner-banner-w3ls {
-    background: url(../images/bg4.jpg) no-repeat center;
+   background: url(../images/bn.jpg) no-repeat top;
     background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
@@ -1205,7 +1205,7 @@ p.dont-do a:hover,
     }
 
     .mian-content-wthree {
-        min-height: 52vw;
+        /*min-height: 52vw;*/
     }
 }
 
@@ -1227,7 +1227,7 @@ p.dont-do a:hover,
     }
 
     .mian-content-wthree {
-        min-height: 54vw;
+        /*min-height: 54vw;*/
     }
 
 }
@@ -1308,7 +1308,7 @@ p.dont-do a:hover,
     }
 
     .mian-content-wthree {
-        min-height: 720px;
+        /*min-height: 720px;*/
     }
 
     p.counter {
@@ -1331,7 +1331,7 @@ p.dont-do a:hover,
     .contact_grid_right input[type="text"],
     .contact_grid_right input[type="email"],
     .contact_grid_right textarea {
-        padding: 14px 15px;
+        padding: 10px 10px;
         font-size: 13px;
     }
 
@@ -1379,7 +1379,7 @@ p.dont-do a:hover,
     }
 
     .mian-content-wthree {
-        min-height: 780px;
+        /*min-height: 780px;*/
     }
 
     .style-banner h3 span {
@@ -1456,7 +1456,7 @@ p.dont-do a:hover,
     }
 
     .mian-content-wthree {
-        min-height: 740px;
+        /*min-height: 740px;*/
     }
 
     .w3layouts_stats_left {
@@ -1622,7 +1622,7 @@ p.dont-do a:hover,
     }
 
     .mian-content-wthree {
-        min-height: 700px;
+        /*min-height: 700px;*/
     }
 
     .navbar-light .navbar-nav .nav-link {
@@ -1636,7 +1636,7 @@ p.dont-do a:hover,
 
 @media(max-width: 440px) {
     .contact_grid_right textarea {
-        min-height: 140px;
+        min-height: 100px;
     }
 
     .demo>li {
@@ -1676,7 +1676,7 @@ p.dont-do a:hover,
     }
 
     .contact_grid_right button {
-        padding: 14px 0;
+        padding: 10px 0;
         font-size: 13px;
     }
 
@@ -1725,7 +1725,7 @@ p.dont-do a:hover,
     }
 
     .mian-content-wthree {
-        min-height: 650px;
+        /*min-height: 650px;*/
     }
 
     .navbar-light .navbar-nav .nav-link {
@@ -1788,7 +1788,7 @@ p.dont-do a:hover,
     }
 
     .mian-content-wthree {
-        min-height: 620px;
+        /*min-height: 620px;*/
     }
 
     .agents-w3 {

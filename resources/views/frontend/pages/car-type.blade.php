@@ -22,64 +22,42 @@
 	<div class="col-md-8">
 
 		<table class="table table-hover table-striped table-reponse">
-			<thead class="thead-light">
+			<thead class="thead-dark">
 				<tr>
 					<th>Nhà Xe</th>
 					<th>Bến Xe</th>
 					<th>Tuyến</th>
 					<th>Liên Hệ</th>
-					<th>Chi Tiết</th>
+					<th class="text-center">Chi Tiết</th>
 				</tr>
 			</thead>
 			<tbody>
+				@foreach($cars as $car)
 				<tr>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
+					<td class="text-capitalize"><b>{{ $car->name }}</b></td>
+					<td class="text-capitalize">{{ $car->station_go.'-'.$car->station_back }}</td>
+					<td>{{ $car->getRoute->name }}</td>
+					<td>
+						@php
+							$car_phones = explode(';',$car->phone);	
+						@endphp
+						@foreach($car_phones as $phone)
+							{{ $phone }}<br>
+						@endforeach
+					</td>
 					<td class="text-center">
-						<a href="{{ route('chi-tiet.show','ngoc-han') }}" title="">
+						<a href="{{ route('chi-tiet.show',[$car->getTypeCar->slug,$car->slug]) }}" title="">
 							<button class="btn btn-sm btn-info" type="button">Xem</button>
 						</a>
 					</td>
 				</tr>
-				<tr>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-				</tr>
-				<tr>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-				</tr>
-				<tr>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-				</tr>
-				<tr>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-				</tr>
-				<tr>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-					<td>data</td>
-				</tr>
-			</tbody>
+				@endforeach
 		</table>
+		<div class="card-footer py-4">
+                    <nav class="d-flex justify-content-end" aria-label="...">
+                        {{ $cars->links() }}
+                    </nav>
+                </div>
 	</div>
 	{{-- google ads --}}
 	@include('frontend.layouts.partials.google-ads-1')

@@ -18,10 +18,17 @@ class Car extends Model
     	'line',
     	'phone',
     	'address',
-    	'active'
+    	'active',
+        'car_type'
     ];
 
     public function scopeActive($query){
     	return $query->where('active',1);
+    }
+    public function getTypeCar(){
+        return $this->belongsTo(TypeCar::class,'car_type','id');
+    }
+    public function getRoute(){
+        return $this->belongsTo(Route::class,'route_id','id');
     }
 }

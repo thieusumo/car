@@ -87,7 +87,8 @@
                 </li>
                 </ul>
             </div>
-        </div><script src="{{ asset('js/app.js') }}" type="text/javascript" charset="utf-8"></script>
+        </div>
+        <script src="{{ asset('js/app.js') }}" type="text/javascript" charset="utf-8"></script>
         <script src="{{ asset('js/vendor.js') }}" type="text/javascript" charset="utf-8"></script>
         <script src="{{ asset('js/manifest.js') }}" type="text/javascript" charset="utf-8"></script>
         {{-- <script src="{{ asset('black') }}/js/core/jquery.min.js"></script> --}}

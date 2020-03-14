@@ -32,6 +32,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href="{{ asset('web/css/style2.css')}}" rel='stylesheet' type='text/css' />
     <!-- Style-CSS -->
     <link href="{{ asset('web/css/font-awesome.min.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" type="{{ asset('css/app.css') }}" href="">
     <!-- Font-Awesome-Icons-CSS -->
     <!-- //Custom-Files -->
 
@@ -44,16 +46,34 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         rel="stylesheet">
     <!-- //Web-Fonts -->
     @yield('style')
+    <style type="text/css" media="screen">
+
+    </style>
 </head>
 
 <body>
-    <div id="fb-root"></div>
     @include('frontend.layouts.partials.header')
     @yield('content')
     @include('frontend.layouts.partials.footer')
 
 </body>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v4.0&appId=526578857783756&autoLogAppEvents=1"></script>
+
+<script src="{{ asset('js/app.js') }}" type="text/javascript" charset="utf-8"></script>
+<script src="{{ asset('js/vendor.js') }}" type="text/javascript" charset="utf-8"></script>
+<script src="{{ asset('js/manifest.js') }}" type="text/javascript" charset="utf-8"></script>
+
 @yield('script')
+<script>
+    $(document).ready(function($) {
+
+        @if(session('danger'))
+           $.notify('{{session('danger')}}',{type:'danger'});
+        @elseif(session('success'))
+            $.notify('{{session('success')}}',{type:'success'});
+        @endif
+
+
+    });
+</script>
 
 </html>

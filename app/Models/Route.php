@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Route extends Model
 {
-    protected $table = 'routes';
+    protected $table = 'route';
     protected $fillable = ['name','slug','active'];
 
     public function scopeActive($query){
-    	return $query->where('status',1);
+    	return $query->where('active',1);
     }
 }

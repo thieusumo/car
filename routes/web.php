@@ -14,9 +14,14 @@ Route::get('/', 'PageController@index')->name('home');
 Route::get('{slug}', 'PageController@page')->name('route');
 
 Route::resource('customer', 'CustomerController');
-Route::get('loai-xe/{type}', 'PageController@carType')->name('car-type');
 //Car
-Route::resource('chi-tiet', 'CarController');
+Route::group(['prefix'=>'loai-xe'],function(){
+	
+	Route::get('loai-xe/{type}', 'PageController@carType')->name('car-type');
+	Route::resource('chi-tiet', 'CarController');
+});
+//search car
+Route::get('tim-kiem','CarController@search')->name('car.search');
 
 
 
