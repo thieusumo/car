@@ -133,7 +133,7 @@ a.move-top span {
 /* header */
 header {
     background: #313131;
-    position: fixed;
+    /*position: fixed;*/
     width: 100%;
     z-index: 999;
 }
@@ -550,8 +550,7 @@ li>a:only-child:after {
 }
 
 .style-banner h3 span {
-    color: #ff6b6b;
-    background: #fff;
+    color: yellow;
     padding: 0px 17px 5px;
     font-size: 50px;
 }
@@ -1015,8 +1014,8 @@ ul.apps-lists li a.active span {
     outline: none;
     padding: 10px;
     font-size: 14px;
-    color: #fff;
-    background: #edf247;
+    color: #000;
+    background: yellow;
     border: none;
     -webkit-border-radius: 0px;
     -o-border-radius: 0px;
@@ -1140,11 +1139,11 @@ label.col-form-label {
 
 .modal-body .form-control {
     background: #fff;
-    border-radius: 0px;
-    -webkit-border-radius: 0px;
-    -o-border-radius: 0px;
-    -ms-border-radius: 0px;
-    -moz-border-radius: 0px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -moz-border-radius: 10px;
     border: none;
     padding: 12px 14px;
     font-size: 15px;
@@ -1154,10 +1153,10 @@ button.button-style-w3 {
     outline: none;
     padding: 12px 20px;
     font-size: 14px;
-    color: #fff;
-    background: #ff6b6b;
+    color: #000;
+    background: yellow;
     border: none;
-    border-radius: 0px;
+    border-radius: 10px;
     letter-spacing: 1px;
     text-transform: uppercase;
     -webkit-transition: 0.5s all;
@@ -1486,7 +1485,7 @@ p.dont-do a:hover,
     }
 
     .modal-body .form-control {
-        padding: 10px 14px;
+        padding: 5px 10px;
     }
 }
 
@@ -1662,7 +1661,7 @@ p.dont-do a:hover,
     }
 
     .mian-content-wthree {
-        min-height: 680px;
+        /*min-height: 680px;*/
     }
 }
 

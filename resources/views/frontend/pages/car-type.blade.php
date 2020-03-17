@@ -15,18 +15,17 @@
 {{--include search bar --}}
 @include('frontend.layouts.partials.search-bar')
 {{--end include search bar --}}
-<div class="row mt-5">
+<div class="row mt-5" style="margin-right: 0px;margin-left: 0px">
 	{{-- google ads --}}
 	@include('frontend.layouts.partials.google-ads-1')
 	{{-- end google ads --}}
-	<div class="col-md-8">
+	<div class="col-md-8 mx-0 px-0">
 
 		<table class="table table-hover table-striped table-reponse">
-			<thead class="thead-dark">
+			<thead class="bg-info" >
 				<tr>
 					<th>Nhà Xe</th>
 					<th>Bến Xe</th>
-					<th>Tuyến</th>
 					<th>Liên Hệ</th>
 					<th class="text-center">Chi Tiết</th>
 				</tr>
@@ -36,7 +35,6 @@
 				<tr>
 					<td class="text-capitalize"><b>{{ $car->name }}</b></td>
 					<td class="text-capitalize">{{ $car->station_go.'-'.$car->station_back }}</td>
-					<td>{{ $car->getRoute->name }}</td>
 					<td>
 						@php
 							$car_phones = explode(';',$car->phone);	
@@ -46,7 +44,7 @@
 						@endforeach
 					</td>
 					<td class="text-center">
-						<a href="{{ route('chi-tiet.show',[$car->getTypeCar->slug,$car->slug]) }}" title="">
+						<a href="{{ route('route',[$slug,$car->slug]) }}" title="">
 							<button class="btn btn-sm btn-info" type="button">Xem</button>
 						</a>
 					</td>

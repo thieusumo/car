@@ -11,13 +11,13 @@
 |
 */
 Route::get('/', 'PageController@index')->name('home');
-Route::get('{slug}', 'PageController@page')->name('route');
+Route::get('{slug}/{car_name?}', 'PageController@page')->name('route');
 
 Route::resource('customer', 'CustomerController');
 //Car
 Route::group(['prefix'=>'loai-xe'],function(){
 	
-	Route::get('loai-xe/{type}', 'PageController@carType')->name('car-type');
+	// Route::get('/{type}', 'PageController@carType')->name('car-type');
 	Route::resource('chi-tiet', 'CarController');
 });
 //search car

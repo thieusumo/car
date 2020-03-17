@@ -5,7 +5,6 @@
         <div class="container">
             <div class="style-banner mx-auto">
                 <h3 class="text-wh font-weight-bold">Tìm Kiếm <span>Xe Khách</span></h3>
-                <p class="mt-2 text-li" id="find">theo tuyến, chiều đi và thời gian xuất bến</p>
             </div>
         </div>
         {{--include search bar --}}

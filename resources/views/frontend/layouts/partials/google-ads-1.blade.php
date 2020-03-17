@@ -1,3 +1,3 @@
-<div class="col-md-2">
+<div class="col-md-2 col-sm-12" style="background-color: red;color: #fff">
 	google ads 2
 </div>

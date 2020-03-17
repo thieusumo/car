@@ -9,7 +9,9 @@
             <!-- nav -->
             <div class="nav_w3ls ml-lg-5">
                 <nav>
-                    <label for="drop" class="toggle">Menu</label>
+                    <label for="drop" class="toggle">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </label>
                     <input type="checkbox" id="drop" />
                     <ul class="menu">
                         {!! \App\Models\Menu::getMenu()!!}

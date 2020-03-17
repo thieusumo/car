@@ -45,7 +45,7 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($loai_xe,$id)
+    public function show($loai_xe)
     {
         return $loai_xe;
 

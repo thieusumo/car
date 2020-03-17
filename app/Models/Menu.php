@@ -24,7 +24,8 @@ class Menu extends BaseModel
     	'position',
     	'active',
     	'created_by',
-    	'updated_by'
+    	'updated_by',
+        'menu_type'
     ];
     public function scopeActive($query){
     	return $query->where('active',1);

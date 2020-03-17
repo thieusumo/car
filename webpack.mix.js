@@ -20,6 +20,7 @@ mix.js('resources/js/app.js', 'public/js').extract([
     'datatables.net-buttons/js/buttons.html5',
     'datatables.net-buttons/js/buttons.print',
 ]);
+mix.js('resources/js/custom.js','public/js');
 mix.sass('resources/sass/app.scss', 'public/css');
 mix.copy('resources/theme','public');
 mix.copy('resources/file','public/file');

@@ -9,7 +9,7 @@ class MenuPresenter extends Presenter {
 		if($this->parent_id == 0)
 			return '<li><a class="text-uppercase" href="'.route('route',$this->slug).'">'.$this->name.'</a></li>';
 		else
-			return '<li><a class="text-uppercase" href="'.route('car-type',$this->slug).'">'.$this->name.'</a></li>';
+			return '<li><a class="text-uppercase" href="'.route('route',$this->slug).'">'.$this->name.'</a></li>';
 	}
 	public function openTag(){
 		return '

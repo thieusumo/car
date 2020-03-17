@@ -1,3 +1,9 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
 <!DOCTYPE HTML>
 <html lang="zxx">
 
@@ -38,36 +44,30 @@
     <link
         href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
         rel="stylesheet">
-    <!-- //Web-Fonts -->
-    @yield('style')
-    <style type="text/css" media="screen">
-
-    </style>
 </head>
 
 <body>
-    @include('frontend.layouts.partials.header')
-    @yield('content')
-    @include('frontend.layouts.partials.footer')
+    <div class="col-md-4 offset-md-4 text-center header-error">
+        <img style="width:100%" src="{{ asset('web/images/404.png') }}" alt="">
+        <h3>404 -PAGE NOT FOUND</h3>
+        <p>Chúng tôi dường như không thể tìm thấy trang bạn tìm kiếm</p>
+        <div class="row">
+            <div class="col-6">
+                <a href="{{ route('home') }}" title="">
+                    <button type="submit" class="btn button-style-w3" style="background-color: blue;color: white">Về Trang Chủ</button>
+                </a>
+            </div>
+            <div class="col-6">
+                <button type="submit" onclick="goBack()" class="btn button-style-w3 back-btn" style="background-color: red;color: white">Trở Lại</button>
+            </div>
+            
+        </div>
+    </div>
 
 </body>
-
-<script src="{{ asset('js/app.js') }}" type="text/javascript" charset="utf-8"></script>
-<script src="{{ asset('js/vendor.js') }}" type="text/javascript" charset="utf-8"></script>
-<script src="{{ asset('js/manifest.js') }}" type="text/javascript" charset="utf-8"></script>
-
-@yield('script')
 <script>
-    $(document).ready(function($) {
-
-        @if(session('danger'))
-           $.notify('{{session('danger')}}',{type:'danger'});
-        @elseif(session('success'))
-            $.notify('{{session('success')}}',{type:'success'});
-        @endif
-
-
-    });
+    function goBack(){
+        window.history.back()
+    }
 </script>
-
 </html>

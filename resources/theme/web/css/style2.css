@@ -1,3 +1,6 @@
+.text-yel{
+    color: yellow;
+}
 .search-sec{
     padding: 1rem;
 }
@@ -20,6 +23,11 @@
     text-transform: capitalize;
     height: calc(3rem + 2px) !important;
     border-radius:0;
+    background-color: yellow;
+}
+.header-error h3{
+    font-size: 20px;
+    font-weight: 600;
 }
 @media (min-width: 992px){
     .search-sec{
@@ -27,11 +35,43 @@
         top: -114px;
         background: rgba(26, 70, 104, 0.51);
     }
+    .header-error{
+        margin-top: 10%;
+    }
+    .header-error p{
+        font-size: 18px;
+        color: #000;
+    }
 }
 
 @media (max-width: 992px){
     .search-sec{
         background: #1A4668;
+    }
+    .search-slt,.wrn-btn{
+        height: 2.5rem!important;
+    }
+    .modal-body>form>.form-group,.modal-body>form>label.col-form-label{
+        margin-bottom: 0!important;
+    }
+    button.button-style-w3{
+        padding: 6px 10px;
+    }
+    .header-error{
+        margin-top: 30%;
+    }
+    .header-error p{
+        font-size: 16px;
+        color: #000;
+    }
+    .style-banner h3{
+        font-size: 28px!important;
+    }
+    .ads-1{
+        display: none;
+    }
+    .mian-content-wthree{
+        min-height: 500px;
     }
 }
 
