@@ -5,11 +5,16 @@
   !*** ./resources/js/custom.js ***!
   \********************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function goBack() {
+/* WEBPACK VAR INJECTION */(function($) {function goBack() {
   window.history.back();
 }
+
+$(document).on("click", ".submit-comment", function () {
+  alert('ok');
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),
 
@@ -25,4 +30,4 @@ module.exports = __webpack_require__(/*! C:\xampp\htdocs\car\resources\js\custom
 
 /***/ })
 
-},[[1,"/js/manifest"]]]);
+},[[1,"/js/manifest","/js/vendor"]]]);
