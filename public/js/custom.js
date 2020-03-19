@@ -14,6 +14,9 @@
 $(document).on("click", ".submit-comment", function () {
   alert('ok');
 });
+$(".menu-mobile").click(function () {
+  $(this).children('i').toggleClass('fa-align-right fa-bars');
+});
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
 
 /***/ }),

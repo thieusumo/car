@@ -5,7 +5,7 @@
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                        	<select class="form-control search-slt" placeholder=""  style="border-radius:20px 0 0 0">
+                        	<select class="form-control search-slt" id="route-car" placeholder=""  style="border-radius:20px 0 0 0">
                                     <option value="" disabled class="text-capitalize"><b>Chọn Tuyến</b></option>
                                 @foreach($route_composer as $route)
                         		    <option value="{{ $route->id }}" class="text-capitalize">{{ $route->name }}</option>

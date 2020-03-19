@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\TypeCar;
 use App\Models\Car;
 use App\Models\Menu;
+use DataTables;
+
+
 class PageController extends Controller
 {
     public function index(){
@@ -44,6 +47,14 @@ class PageController extends Controller
         $data['cars'] = Car::has('getTypeCar')->has('getRoute')->where('car_type',$type_car->id)->paginate(15);
 
         return view('frontend.pages.car-type',$data);
+    }
+    public function datatable(Request $request){
+        $cars = Car::where('car_type',1)->where('route_id',$request->route_car)->get();
+        return DataTables::of($cars)
+        ->addColumn('station',function($row){
+            return $row->station_go." - ".$row->station_back;
+        })
+        ->make(true);
     }
 
 }

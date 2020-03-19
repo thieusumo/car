@@ -13,15 +13,18 @@
 Route::get('/', 'PageController@index')->name('home');
 Route::get('{slug}/{car_name?}', 'PageController@page')->name('route');
 
-Route::resource('customer', 'CustomerController');
-//Car
-Route::group(['prefix'=>'loai-xe'],function(){
-	
-	// Route::get('/{type}', 'PageController@carType')->name('car-type');
-	Route::resource('chi-tiet', 'CarController');
+Route::group(['prefix'=>'{slug}/{car_name?}'],function(){
+	Route::get('/datatable@PageController@datatable')->name('car_type.datatable');
 });
+
+Route::resource('customer', 'CustomerController');
+// //Car
+// Route::group(['prefix'=>'loai-xe'],function(){
+// 	Route::resource('chi-tiet', 'CarController');
+// });
 //search car
 Route::get('tim-kiem','CarController@search')->name('car.search');
+
 
 
 

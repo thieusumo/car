@@ -9,8 +9,8 @@
             <!-- nav -->
             <div class="nav_w3ls ml-lg-5">
                 <nav>
-                    <label for="drop" class="toggle">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    <label for="drop" class="toggle menu-mobile">
+                        <i class="fa fa-bars " aria-hidden="true"></i>
                     </label>
                     <input type="checkbox" id="drop" />
                     <ul class="menu">

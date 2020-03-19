@@ -32,12 +32,12 @@
     <!-- //Custom-Files -->
 
     <!-- Web-Fonts -->
-    <link
+    {{-- <link
         href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
         rel="stylesheet">
     <link
         href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
-        rel="stylesheet">
+        rel="stylesheet"> --}}
     <!-- //Web-Fonts -->
     @yield('style')
     <style type="text/css" media="screen">
@@ -55,6 +55,7 @@
 <script src="{{ asset('js/app.js') }}" type="text/javascript" charset="utf-8"></script>
 <script src="{{ asset('js/vendor.js') }}" type="text/javascript" charset="utf-8"></script>
 <script src="{{ asset('js/manifest.js') }}" type="text/javascript" charset="utf-8"></script>
+<script src="{{ asset('js/custom.js') }}" type="text/javascript" charset="utf-8"></script>
 
 @yield('script')
 <script>

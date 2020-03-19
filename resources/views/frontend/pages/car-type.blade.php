@@ -21,15 +21,14 @@
 	{{-- end google ads --}}
 	<div class="col-md-8 mx-0 px-0">
 
-		<table class="table table-hover table-striped table-reponse">
+		<table class="table table-hover table-striped table-reponse" id="car-type-table">
 			<thead class="bg-info" >
 				<tr>
 					<th>Nhà Xe</th>
 					<th>Bến Xe</th>
 					<th>Liên Hệ</th>
-					<th class="text-center">Chi Tiết</th>
 				</tr>
-			</thead>
+			</thead>{{-- 
 			<tbody>
 				@foreach($cars as $car)
 				<tr>
@@ -50,6 +49,7 @@
 					</td>
 				</tr>
 				@endforeach
+			</tbody> --}}
 		</table>
 		<div class="card-footer py-4">
                     <nav class="d-flex justify-content-end" aria-label="...">
@@ -62,4 +62,8 @@
 	{{-- end google ads --}}
 </div>
 	
+@endsection
+@routes
+@section('script')
+<script src="{{ asset('web/js/car_type.js') }}" type="text/javascript"></script>
 @endsection

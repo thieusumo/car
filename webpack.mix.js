@@ -24,6 +24,7 @@ mix.js('resources/js/custom.js','public/js');
 mix.sass('resources/sass/app.scss', 'public/css');
 mix.copy('resources/theme','public');
 mix.copy('resources/file','public/file');
+mix.copy('resources/web/js','public/js');
 
 mix.autoload({
     'lodash': ['_'],
