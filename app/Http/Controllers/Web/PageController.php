@@ -16,28 +16,57 @@ class PageController extends Controller
     	return view('frontend.pages.home');
     }
     public function page($slug,$car_name=""){
-        $check_menu = Menu::where([['menu_type','1'],['slug',$slug],['parent_id','!=','0']])->count();
+        
+        //Check slug menu
+        $check_menu = Menu::active()->where('slug',$slug);
+        if($check_menu->count() == 0)
+            abort(404);
 
-        if($check_menu > 0){
-            if($car_name == ""){
-                $type_car = TypeCar::active()->where('slug',$slug)->first();
-                if(!isset($slug) || $slug == "")
-                    return abort('404');
-                $data['cars'] = Car::has('getTypeCar')->has('getRoute')->where('car_type',$type_car->id)->paginate(15);
+        if($slug == 'lien-he' || $slug == 'dang-nhap' || $slug == 'dang-ki' || $slug == 'dang-xuat'){
+
+            if(!is_file(resource_path('views/frontend/pages/'.$slug.'.blade.php')))
+                return abort('404');
+            return view('frontend.pages.'.$slug);
+
+        }elseif($slug == 'xe-tien-chuyen'){
+
+                $data['name'] = $check_menu->first()->name;
                 $data['slug'] = $slug;
+                $cars = Car::where([['car_type',2],['active',1]]);
 
-                return view('frontend.pages.car-type',$data);
+            if($car_name == ""){
+                $data['cars'] = $cars->paginate(15);
+                return view('frontend.pages.xe-tien-chuyen',$data);
+            }else{
+                $car_info = $cars->where('slug',$car_name);
+                if($car_info->count() == 0)
+                    abort(404);
+                $data['car'] = $car_info->first();
+                return view('frontend.car.car-detail',$data);
             }
-            else{
-                return view('frontend.car.car-detail');
-            }
-
                 
+        }else{
+            $data['name'] = $check_menu->first()->name;
+            $data['slug'] = $slug;
+            $cars = Car::join('route',function($join){
+                    $join->on('cars.route_id','route.id');
+                })
+                ->where([['route.route',$slug],['cars.car_type',1],['cars.active',1]]);
+
+            if($car_name == ""){
+                $data['cars'] = $cars->paginate(15);
+                return view('frontend.pages.list-car',$data);
+            }else{
+                $car_info = $cars->where('slug',$car_name);
+                if($car_info->count() == 0)
+                    abort(404);
+                $data['car'] = $car_info->first();
+                return view('frontend.car.car-detail',$data);
+            }
         }
 
-        if(!is_file(resource_path('views/frontend/pages/'.$slug.'.blade.php')))
-            return abort('404');
-        return view('frontend.pages.'.$slug);
+            
+
     }
     public function carType($type){
         return 'ok';
@@ -47,14 +76,6 @@ class PageController extends Controller
         $data['cars'] = Car::has('getTypeCar')->has('getRoute')->where('car_type',$type_car->id)->paginate(15);
 
         return view('frontend.pages.car-type',$data);
-    }
-    public function datatable(Request $request){
-        $cars = Car::where('car_type',1)->where('route_id',$request->route_car)->get();
-        return DataTables::of($cars)
-        ->addColumn('station',function($row){
-            return $row->station_go." - ".$row->station_back;
-        })
-        ->make(true);
     }
 
 }

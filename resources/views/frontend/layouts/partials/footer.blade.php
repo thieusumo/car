@@ -116,7 +116,7 @@
     </div>
     <!-- //copyright -->
     <!-- move top icon -->
-    <a href="#home" class="move-top text-center">
-        <span class="fa fa-angle-double-up" aria-hidden="true"></span>
+    <a href="javascript:void(0)" style="display: none" title="Lên đầu trang" class="move-top text-center">
+        <span class="fa fa-angle-double-up text-success" aria-hidden="true"></span>
     </a>
     <!-- //move top icon -->

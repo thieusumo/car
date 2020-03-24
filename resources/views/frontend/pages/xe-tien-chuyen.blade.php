@@ -25,15 +25,28 @@
 			<thead class="bg-info" >
 				<tr>
 					<th>Nhà Xe</th>
-					<th>Bến Xe</th>
+					<th>Khu Vực</th>
+					<th class="text-center">Xếp Hạng</th>
 					<th>Liên Hệ</th>
 				</tr>
-			</thead>{{-- 
+			</thead>
 			<tbody>
 				@foreach($cars as $car)
 				<tr>
-					<td class="text-capitalize"><b>{{ $car->name }}</b></td>
+					<td class="text-capitalize">
+						<a href="{{ route('route',[$slug,$car->slug]) }}" title=""><b>{{ $car->name }}</b></a>
+					</td>
 					<td class="text-capitalize">{{ $car->station_go.'-'.$car->station_back }}</td>
+					<td class="text-center star-box">
+						@for($i=1;$i<6;$i++)
+						    @if($i>$car->stars)
+						        <i class="fa d-star fa-star-o" aria-hidden="true"></i>
+						    @else
+						        <i class="fa d-star fa-star star" aria-hidden="true"></i>
+						    @endif
+
+					    @endfor
+					</td>
 					<td>
 						@php
 							$car_phones = explode(';',$car->phone);	
@@ -42,14 +55,9 @@
 							{{ $phone }}<br>
 						@endforeach
 					</td>
-					<td class="text-center">
-						<a href="{{ route('route',[$slug,$car->slug]) }}" title="">
-							<button class="btn btn-sm btn-info" type="button">Xem</button>
-						</a>
-					</td>
 				</tr>
 				@endforeach
-			</tbody> --}}
+			</tbody>
 		</table>
 		<div class="card-footer py-4">
                     <nav class="d-flex justify-content-end" aria-label="...">
@@ -65,5 +73,8 @@
 @endsection
 @routes
 @section('script')
-<script src="{{ asset('web/js/car_type.js') }}" type="text/javascript"></script>
+<script>
+	{{-- var slug = '{{ $slug }}'; --}}
+</script>
+{{-- <script src="{{ asset('web/js/car_type.js') }}" type="text/javascript"></script> --}}
 @endsection

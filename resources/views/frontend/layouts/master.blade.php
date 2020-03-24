@@ -46,9 +46,13 @@
 </head>
 
 <body>
-    @include('frontend.layouts.partials.header')
-    @yield('content')
-    @include('frontend.layouts.partials.footer')
+    <div class="loader"></div>
+    <span class="content-body">
+        @include('frontend.layouts.partials.header')
+        @yield('content')
+        @include('frontend.layouts.partials.footer')
+    </span>
+   
 
 </body>
 

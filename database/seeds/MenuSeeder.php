@@ -19,20 +19,9 @@ class MenuSeeder extends Seeder
         $menu_arr = [
         	[
         		'name'=> 'Home',
-	        	'slug' => 'home',
+	        	'slug' => '/',
 	        	'parent_id' => 0,
 	        	'position' => 1,
-	        	'active'=> 1,
-	        	'created_by' => 2,
-	        	'updated_by' => 2,
-	        	'created_at' => now(),
-            	'updated_at' => now()
-        	],
-        	[
-        		'name'=> 'Xe',
-	        	'slug' => 'xe',
-	        	'parent_id' => 0,
-	        	'position' => 2,
 	        	'active'=> 1,
 	        	'created_by' => 2,
 	        	'updated_by' => 2,
@@ -42,8 +31,8 @@ class MenuSeeder extends Seeder
         	[
         		'name'=> 'Xe Khách',
 	        	'slug' => 'xe-khach',
-	        	'parent_id' => 2,
-	        	'position' => 1,
+	        	'parent_id' => 0,
+	        	'position' => 2,
 	        	'active'=> 1,
 	        	'created_by' => 2,
 	        	'updated_by' => 2,
@@ -53,6 +42,39 @@ class MenuSeeder extends Seeder
         	[
         		'name'=> 'Xe Tiện Chuyến',
 	        	'slug' => 'xe-tien-chuyen',
+	        	'parent_id' => 0,
+	        	'position' => 3,
+	        	'active'=> 1,
+	        	'created_by' => 2,
+	        	'updated_by' => 2,
+	        	'created_at' => now(),
+            	'updated_at' => now()
+        	],
+        	[
+        		'name'=> 'Hà Nội',
+	        	'slug' => 'ha-noi',
+	        	'parent_id' => 2,
+	        	'position' => 2,
+	        	'active'=> 1,
+	        	'created_by' => 2,
+	        	'updated_by' => 2,
+	        	'created_at' => now(),
+            	'updated_at' => now()
+        	],
+        	[
+        		'name'=> 'Tây Nguyên',
+	        	'slug' => 'tay-nguyen',
+	        	'parent_id' => 2,
+	        	'position' => 2,
+	        	'active'=> 1,
+	        	'created_by' => 2,
+	        	'updated_by' => 2,
+	        	'created_at' => now(),
+            	'updated_at' => now()
+        	],
+        	[
+        		'name'=> 'Sài Gòn',
+	        	'slug' => 'sai-gon',
 	        	'parent_id' => 2,
 	        	'position' => 2,
 	        	'active'=> 1,

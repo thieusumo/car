@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Car;
+use DataTables;
 
 class CarController extends Controller
 {
@@ -85,5 +86,17 @@ class CarController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function datatable(Request $request){
+
+        if($request->slug == 'xe-tien-chuyen')
+            $cars = Car::where('car_type',2)->get();
+        else
+            $cars = Car::where('car_type',1)->where('route_id',$request->route_car)->get();
+        return DataTables::of($cars)
+        ->addColumn('station',function($row){
+            return $row->station_go." - ".$row->station_back;
+        })
+        ->make(true);
     }
 }

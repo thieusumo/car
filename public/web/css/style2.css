@@ -1,12 +1,42 @@
+.carousel-control-prev,.carousel-control-next{
+    width: 4%!important;
+}
+.loader {
+    display: none;
+    position: fixed;
+    top: 30%;
+    right: 45%;
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #3498db;
+    border-bottom: 3px solid #3498db;
+    width: 60px;
+    height: 60px;
+    -webkit-animation: spin 1s linear infinite; /* Safari */
+    animation: spin 1s linear infinite;
+    z-index: 1000;
+}
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.report-info:hover{
+    color: green;
+}
+.star{
+    color: yellow;
+}
 .content-detail{
     padding: 5px;
 }
-.example-comment{
-    border-radius: 20px;
-    border: .5px #cec2c2  solid;
-    font-size: .9em;
-    margin-right: .5em;
-    padding: 0 .4em;
+.box-y-cmt{
+    display: none;
 }
 .comment-box{
     padding: 1em;
@@ -42,7 +72,13 @@
     font-size: 20px;
     font-weight: 600;
 }
+.ava-cmt{
+    border-radius: 50%;
+}
 @media (min-width: 992px){
+    .ava-cmt{
+        width: 50px;
+    }
     .search-sec{
         /*position: relative;*/
         top: -114px;
@@ -54,6 +90,12 @@
     .header-error p{
         font-size: 18px;
         color: #000;
+    }
+    .detail-content{
+        background-color: #fff;
+        margin: 0 .5em 2em;
+        padding: 1em;
+        border-radius: 5px;
     }
 }
 
@@ -85,6 +127,34 @@
     }
     .mian-content-wthree{
         min-height: 500px;
+    }
+    .d-star{
+        float: left!important;
+    }
+    .star-box{
+        padding-right: 0!important;
+        padding-left: 0!important;
+        margin-left: 0!important;
+        margin-right: 0!important;
+    }
+    .ava-cmt{
+        width: 30px;
+    }
+    figcaption{
+        font-size: 12px;
+    }
+    .detail-content{
+        background-color: #fff;
+        margin: 0 .5em 1em;
+        padding: .3em;
+        border-radius: 5px;
+    }
+    .title-content{
+        font-size: 1rem!important;
+    }
+    .star-line{
+        margin-right: 0!important;
+        margin-left: 0!important;
     }
 }
 

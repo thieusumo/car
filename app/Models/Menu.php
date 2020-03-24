@@ -44,11 +44,9 @@ class Menu extends BaseModel
     		$children_menu = self::treeMenu($list,$parent->id);
 
     		if(!empty($children_menu))
-
-    			$menu_tree[$key]['children'] = $children_menu;
-    		else 
+                $menu_tree[$key]['children'] = $children_menu;
+    		else
     			$menu_tree[$key]['children'] = [];
-
     	}
     	return $menu_tree;
     	
