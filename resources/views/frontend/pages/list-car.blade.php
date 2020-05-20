@@ -19,7 +19,7 @@
 	{{-- google ads --}}
 	@include('frontend.layouts.partials.google-ads-1')
 	{{-- end google ads --}}
-	<div class="col-md-8 mx-0 px-0">
+	<div class="col-md-8 mx-0 px-0 content-detail">
 		@if($cars->count() > 0)
 		<h4 class="text-center">Tuyến - <span class="text-uppercase">{{ $name }}</span></h4>
 			<p class="text-danger text-center">(*Nhấn vào tên Nhà xe để xem chi tiết)</p>

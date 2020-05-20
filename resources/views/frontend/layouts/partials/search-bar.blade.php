@@ -20,7 +20,7 @@
                         	</select>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                            <select class="form-control search-slt" id="exampleFormControlSelect1">
+                            <select class="form-control search-slt" id="range-time-go">
                                 <option>Chọn Thời Gian</option>
                                 <option>Example one</option>
                                 <option>Example one</option>

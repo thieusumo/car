@@ -9,7 +9,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: Roboto,Helvetica,Arial,sans-serif;
-    background-color: #f4f4f4;
+    background-color: #e9ebee;
 }
 
 body button,
@@ -1125,8 +1125,8 @@ p.copy-right-grids a {
 
 /* login */
 .modal-body {
-    max-width: 600px;
-    margin: 0 auto;
+    /*max-width: 600px;*/
+    /*margin: 0 auto;*/
 }
 
 label.col-form-label {
@@ -1136,7 +1136,7 @@ label.col-form-label {
     margin-bottom: 5px;
 }
 
-.modal-body .form-control {
+/*.modal-body .form-control {
     background: #fff;
     border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -1146,11 +1146,11 @@ label.col-form-label {
     border: none;
     padding: 12px 14px;
     font-size: 15px;
-}
+}*/
 
 button.button-style-w3 {
     outline: none;
-    padding: 12px 20px;
+    padding: 8px 10px;
     font-size: 14px;
     color: #000;
     background: yellow;

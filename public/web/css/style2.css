@@ -1,6 +1,71 @@
+/*home*/
+.style-banner{
+    padding-top: 0!important;
+}
+/*car-edit*/
+.date_go,.time_go,.time_back,.date_back{
+    line-height: 30px;
+    display: inline-block;
+    margin:2px;
+}
+.date_go,.date_back{
+    width: 30px;
+}
+/*end car edit*/
+/*detail car*/
+.title-content{
+    margin: 0 0.5em;
+    text-transform: uppercase;
+}
+.ans-content{
+    padding-left: 10px
+}
+.ans-box{
+    border-bottom: 1px solid #f4f4f4;
+}
+.progress{
+    height: .8rem;
+}
+.report-info:hover{
+    color: green;
+}
+.report-info{
+    color: #17a2b8;
+}
+.more-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.box-more-image .contain-image{
+    height: 100px;
+}
+.required:after {
+    content:" *";
+    color: red;
+  }
 .carousel-control-prev,.carousel-control-next{
     width: 4%!important;
 }
+.report-info:hover{
+    color: green;
+}
+.star{
+    color: yellow;
+}
+.content-detail{
+    padding: 5px;
+}
+.box-y-cmt{
+    display: none;
+}
+.comment-box{
+    padding: 1em;
+}
+/*end detail car*/
+
+
+/*Loader spinner*/
 .loader {
     display: none;
     position: fixed;
@@ -26,21 +91,8 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-.report-info:hover{
-    color: green;
-}
-.star{
-    color: yellow;
-}
-.content-detail{
-    padding: 5px;
-}
-.box-y-cmt{
-    display: none;
-}
-.comment-box{
-    padding: 1em;
-}
+/*end loader spinner*/
+
 .text-yel{
     color: yellow;
 }
@@ -75,6 +127,13 @@
 .ava-cmt{
     border-radius: 50%;
 }
+.modal-header{
+    background-color: #545454;
+    color: white;
+}
+.modal-header button{
+    color: white;
+}
 @media (min-width: 992px){
     .ava-cmt{
         width: 50px;
@@ -96,6 +155,13 @@
         margin: 0 .5em 2em;
         padding: 1em;
         border-radius: 5px;
+    }
+    .modal-header{
+        padding:     .1rem  .5rem!important;
+    }
+    .more-image-upload{
+        width: 100px;
+        height: 100px;
     }
 }
 
@@ -145,7 +211,7 @@
     }
     .detail-content{
         background-color: #fff;
-        margin: 0 .5em 1em;
+        margin: 0;
         padding: .3em;
         border-radius: 5px;
     }
@@ -155,6 +221,13 @@
     .star-line{
         margin-right: 0!important;
         margin-left: 0!important;
+    }
+    .modal-header{
+        padding: .1rem!important;
+    }
+    .more-image-upload{
+        width: 85px;
+        height: 85px;
     }
 }
 

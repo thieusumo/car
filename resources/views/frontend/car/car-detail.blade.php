@@ -1,46 +1,19 @@
 @extends('frontend.layouts.master')
 @section('style')
 <style type="text/css" media="screen">
-	.search-sec{
-        position: initial!important;
-    }
-    .title-content{
-    	margin: 0 0.5em;
-    	text-transform: uppercase;
-    }
-    .ans-content{
-    	padding-left: 10px
-    }
-    .ans-box{
-    	border-bottom: 1px solid #f4f4f4;
-    }
-    .progress{
-    	height: .8rem;
-    }
-    .report-info:hover{
-    	color: green;
-    }
-    .report-info{
-    	color: #17a2b8;
-    }
+	
 </style>
 @endsection
 @section('content')
-
-{{-- google ads --}}
+@include('frontend.layouts.partials.image-modal')
+@include('frontend.layouts.partials.modal')
 @include('frontend.layouts.partials.google-ads-2')
-{{--include search bar --}}
-{{-- @include('frontend.layouts.partials.search-bar') --}}
-{{--end include search bar --}}
 <div class="row mt-5" style="margin-right: 0px; margin-left: 0px">
-	{{-- google ads --}}
 		@include('frontend.layouts.partials.google-ads-1')
-	
-	{{-- end google ads --}}
 	<div class="col-md-8 content-detail">
 		<div class="row detail-content">
 			<div class="col-md-6 col-sm-12 text-center">
-				<img src="{{ asset('web/images/bg.jpg') }}" class="w-100 " alt="">
+				<img src="{{ asset('web/images/nhuy_1.jpg') }}" class="w-100 " alt="">
 			</div>
 			<div class="col-md-6 col-sm-12">
 				<h4>{{ $car->name }}</h4>
@@ -65,73 +38,71 @@
 						@endforeach
 					</div>
 				</p>
-				<span class="report-info">
+				<p class="report-info">
 					<i class="fa fa-comment" aria-hidden="true"></i>
 						Phản ánh thông tin nhà xe không chính xác
-				</span>
+				</p>
+				<button type="button" class="btn btn-sm btn-warning text-blue">Chia sẻ lên Facebook</button>
 			</div>
 		</div>
+		<h5 class="title-content">Một số hình ảnh vè nhà xe</h5>
 		<div class="detail-content">
 			<div id="demo" class="carousel slide" data-ride="carousel">
-
-  <!-- Indicators -->
-  <ul class="carousel-indicators">
-    <li data-target="#demo" data-slide-to="0" class="active"></li>
-    <li data-target="#demo" data-slide-to="1"></li>
-    <li data-target="#demo" data-slide-to="2"></li>
-  </ul>
-  
-  <!-- The slideshow -->
-  <div class="carousel-inner">
-    <div class="carousel-item col-md-12 active">
-    	<div class="row">
-    		<div class="col-4 px-1">
-	    		<img src="{{ asset('web/images/bg.jpg') }}" alt="Los Angeles"  style="width: 100%;max-height: 100px">
-	    	</div>
-	    	<div class="col-4 px-1">
-	    		<img src="{{ asset('web/images/bg.jpg') }}" alt="Los Angeles"  style="width: 100%;max-height: 100px">
-	    	</div>
-	    	<div class="col-4 px-1">
-	    		<img src="{{ asset('web/images/bg.jpg') }}" alt="Los Angeles"  style="width: 100%;max-height: 100px">
-	    	</div>
-    	</div>
-    </div>
-    <div class="carousel-item">
-    	<div class="row">
-    		<div class="col-4 px-1">
-	    		<img src="{{ asset('web/images/bg.jpg') }}" alt="Los Angeles"  style="width: 100%;max-height: 100px">
-	    	</div>
-	    	<div class="col-4 px-1">
-	    		<img src="{{ asset('web/images/bg.jpg') }}" alt="Los Angeles"  style="width: 100%;max-height: 100px">
-	    	</div>
-	    	<div class="col-4 px-1">
-	    		<img src="{{ asset('web/images/bg.jpg') }}" alt="Los Angeles"  style="width: 100%;max-height: 100px">
-	    	</div>
-    	</div>
-    </div>
-    <div class="carousel-item">
-        <div class="row">
-    		<div class="col-4 px-1">
-	    		<img src="{{ asset('web/images/bg.jpg') }}" alt="Los Angeles"  style="width: 100%;max-height: 100px">
-	    	</div>
-	    	<div class="col-4 px-1">
-	    		<img src="{{ asset('web/images/bg.jpg') }}" alt="Los Angeles"  style="width: 100%;max-height: 100px">
-	    	</div>
-	    	<div class="col-4 px-1">
-	    		<img src="{{ asset('web/images/bg.jpg') }}" alt="Los Angeles"  style="width: 100%;max-height: 100px">
-	    	</div>
-    	</div>
-    </div>
-  </div>
-  
-  <!-- Left and right controls -->
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
-</div>
+		  
+		  @php
+		  	$count = 9;
+		  @endphp
+		  <!-- The slideshow -->
+		  <div class="carousel-inner box-more-image">
+		    <div class="carousel-item col-md-12 active">
+		    	<div class="row">
+		    		<div class="col-4 px-1 contain-image">
+			    		<img src="{{ asset('web/images/bg.jpg') }}" id="img-0" pos="0" alt="Los Angeles" class="more-image">
+			    	</div>
+			    	<div class="col-4 px-1 contain-image">
+			    		<img src="{{ asset('web/images/9.jpg') }}" id="img-1" pos="1" alt="Los Angeles" class="more-image">
+			    	</div>
+			    	<div class="col-4 px-1 contain-image">
+			    		<img src="{{ asset('web/images/404.jpg') }}" pos="2" id="img-2" alt="Los Angeles" class="more-image">
+			    	</div>
+		    	</div>
+		    </div>
+		    <div class="carousel-item">
+		    	<div class="row">
+		    		<div class="col-4 px-1 contain-image">
+			    		<img src="{{ asset('web/images/ava.jpg') }}" pos="3" id="img-3" alt="Los Angeles" class="more-image">
+			    	</div>
+			    	<div class="col-4 px-1 contain-image">
+			    		<img src="{{ asset('web/images/nhuy_2.png') }}" pos="4" id="img-4" alt="Los Angeles" class="more-image">
+			    	</div>
+			    	<div class="col-4 px-1 contain-image">
+			    		<img src="{{ asset('web/images/404.png') }}" id="img-5" pos="5" alt="Los Angeles" class="more-image">
+			    	</div>
+		    	</div>
+		    </div>
+		    <div class="carousel-item">
+		        <div class="row">
+		    		<div class="col-4 px-1 contain-image">
+			    		<img src="{{ asset('web/images/nhuy_1.jpg') }}" pos="6" id="img-6" alt="Los Angeles" class="more-image">
+			    	</div>
+			    	<div class="col-4 px-1 contain-image">
+			    		<img src="{{ asset('web/images/nhuy_3.jpg') }}" id="img-7" pos="7" alt="Los Angeles" class="more-image">
+			    	</div>
+			    	<div class="col-4 px-1 contain-image">
+			    		<img src="{{ asset('web/images/nhuy_4.jpg') }}" id="img-8" pos="8" alt="Los Angeles" class="more-image">
+			    	</div>
+		    	</div>
+		    </div>
+		  </div>
+		  
+		  <!-- Left and right controls -->
+		  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+		    <span class="carousel-control-prev-icon"></span>
+		  </a>
+		  <a class="carousel-control-next" href="#demo" data-slide="next">
+		    <span class="carousel-control-next-icon"></span>
+		  </a>
+		</div>
 
 		</div>
 		<h5 class="title-content">Hỏi, đáp về nhà xe</h5>
@@ -167,9 +138,17 @@
 		</div>
 		<div class="detail-content box-y-cmt" >
 			<h5 class="text-uppercase">Đánh Giá Của bạn</h5>
-			@for($i=1;$i<6;$i++)
-				<i class="fa fa-star-o" aria-hidden="true"></i>
-			@endfor
+			<h6 class="rating-star">
+				<span class="mr-2">Chọn sao: </span>
+				@for($i=1;$i<6;$i++)
+					@if($i == 1)
+						<i class="fa fa-star star" aria-hidden="true"></i>
+					@else
+						<i class="fa fa-star-o" aria-hidden="true"></i>
+					@endif
+				@endfor
+			</h6>
+				
 			<textarea name="" class="form-control form-control-sm" rows="5" placeholder="Nhận xét của bạn"></textarea>
 			Mẫu: <span class="badge badge-info ml-2">Chất lượng tốt</span><span class="badge badge-info ml-2">Nhà xe nhiệt tình</span><span class="badge badge-info ml-2">Nhân viên thân thiện</span><br>
 			<input type="button" class="btn btn-warning btn-sm my-1 submit-comment" value="Gửi nhận xét" name="">
@@ -248,9 +227,11 @@
 @endsection
 @section('script')
 <script>
+	var count = {{ $count }};
 	$(document).ready(function() {
 		
 	});
 </script>
+<script src="{{ asset('web/js/car_detail.js') }}" type="text/javascript"></script>
 
 @endsection

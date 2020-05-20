@@ -1,10 +1,25 @@
+function changeImage(that,input_file,image_preview,btn_remove=""){
+	$("#"+input_file).click();
+	$("#"+input_file).change(function() {
+	    if(this.files && this.files[0]) {
+		    var reader = new FileReader();
+		    reader.onload = function(e) {
+		      $('#'+image_preview).attr('src', e.target.result).addClass('border border-info rounded');
+		    }
+		    reader.readAsDataURL( this.files[0]); // convert to base64 string
+		    if(btn_remove != "")
+		    	$('.'+btn_remove).css('display', '');
+		  }
+	});
+}
+function removeImage(that,image_preview){
+	$("#"+image_preview).attr('src','').removeClass('border border-info rounded');
+	$(that).siblings('input[type="file"]').val("");
+	$(that).css('display', 'none');
+}
 function goBack() {
    window.history.back();
 }
-$(document).on("click",".submit-comment",function(){
-	alert('ok');
-});
-
 $(".menu-mobile").click(function(){
 	$(this).children('i').toggleClass('fa-align-right fa-bars');
 })

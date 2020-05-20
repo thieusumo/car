@@ -15,6 +15,8 @@
                     <input type="checkbox" id="drop" />
                     <ul class="menu">
                         {!! \App\Models\Menu::getMenu()!!}
+                        <li><a class="text-uppercase" onclick="showModal('login-modal','register-modal')" href="javascript:void(0)">Đăng Nhập</a></li>
+                        <li><a class="text-uppercase" onclick="showModal('register-modal','login-modal')" href="javascript:void(0)">Đăng kí</a></li>
                     </ul>
                 </nav>
             </div>

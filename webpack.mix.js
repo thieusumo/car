@@ -19,8 +19,9 @@ mix.js('resources/js/app.js', 'public/js').extract([
     'datatables.net-buttons/js/buttons.colVis',
     'datatables.net-buttons/js/buttons.html5',
     'datatables.net-buttons/js/buttons.print',
+    'eonasdan-bootstrap-datetimepicker'
 ]);
-mix.js('resources/js/custom.js','public/js');
+mix.copy('resources/js/custom.js','public/js/custom.js');
 mix.sass('resources/sass/app.scss', 'public/css');
 mix.copy('resources/theme','public');
 mix.copy('resources/file','public/file');

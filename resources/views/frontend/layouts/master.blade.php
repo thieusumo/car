@@ -2,7 +2,7 @@
 <html lang="zxx">
 
 <head>
-    <title>Land Real Estates Category Bootstrap Responsive website Template | Home :: w3layouts</title>
+    <title>Xe Nam Định</title>
     <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8" />
@@ -46,6 +46,8 @@
 </head>
 
 <body>
+    @include('frontend.layouts.partials.login-modal')
+    @include('frontend.layouts.partials.register-modal')
     <div class="loader"></div>
     <span class="content-body">
         @include('frontend.layouts.partials.header')
@@ -63,7 +65,14 @@
 
 @yield('script')
 <script>
+    function showModal(modal_id,hidden_id=""){
+        $("#"+modal_id).modal({backdrop: "static"});
+        if(hidden_id != "")
+            $("#"+hidden_id).modal('hide');
+    }
     $(document).ready(function($) {
+
+        $('#range-time-go').datetimepicker();
 
         @if(session('danger'))
            $.notify('{{session('danger')}}',{type:'danger'});
@@ -71,6 +80,7 @@
             $.notify('{{session('success')}}',{type:'success'});
         @endif
 
+    
 
     });
 </script>

@@ -13,7 +13,16 @@ use DataTables;
 class PageController extends Controller
 {
     public function index(){
-    	return view('frontend.pages.home');
+        $cars = Car::join('route',function($join){
+            $join->on('cars.route_id','route.id');
+        })
+        ->where('cars.car_type',1)
+        ->select('cars.name as car_name','cars.slug as car_slug','cars.*','route.*')
+        ->orderBy('cars.stars','desc')
+        ->get();
+        $data['cars'] = $cars->groupBy('name');
+
+    	return view('frontend.pages.home',$data);
     }
     public function page($slug,$car_name=""){
         
@@ -51,7 +60,8 @@ class PageController extends Controller
             $cars = Car::join('route',function($join){
                     $join->on('cars.route_id','route.id');
                 })
-                ->where([['route.route',$slug],['cars.car_type',1],['cars.active',1]]);
+                ->where([['route.route',$slug],['cars.car_type',1],['cars.active',1]])
+                ->select('route.*','cars.*','route.name as route_name');
 
             if($car_name == ""){
                 $data['cars'] = $cars->paginate(15);
