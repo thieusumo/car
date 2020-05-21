@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Times extends Model
 {
     protected $table = "times";
-    protected $fillable = ['time','car_id','route_type'];
+    protected $fillable = ['car_id','route_type','back','go','all'];
 }

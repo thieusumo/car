@@ -20,9 +20,28 @@
 	@include('frontend.layouts.partials.google-ads-1')
 	{{-- end google ads --}}
 	<div class="col-md-8 mx-0 px-0 content-detail">
-		@if($cars->count() > 0)
+		@if(isset($cars) && $cars->count() > 0)
 		<h4 class="text-center">Tuyến - <span class="text-uppercase">{{ $name }}</span></h4>
 			<p class="text-danger text-center">(*Nhấn vào tên Nhà xe để xem chi tiết)</p>
+			@if(isset($search_chieu) || isset($search_date) || isset($search_clock) )
+				<p>TÌM KIẾM THEO:
+				@if(isset($search_chieu))
+					 Chiều: <span class="text-primary">
+					 	@if($search_chieu == 'di')
+					 		Từ Nam Định
+					 	@else
+					 		Về Nam Định
+					 	@endif
+					 </span>
+				@endif
+				@if(isset($search_clock))
+					Lúc: <span class="text-primary">{{ $search_clock }}</span>
+				@endif
+				@if(isset($search_date))
+					Ngày: <span class="text-primary">{{ $search_date }}</span>
+				@endif
+				</p>
+			@endif 
 			<table class="table table-sm table-hover table-striped table-reponse" id="car-type-table">
 				<thead class="bg-info" >
 					<tr>
@@ -67,9 +86,8 @@
 	        </div>
 
 		@else
-			<p class="text-center">Hiện tại chúng tôi chưa cập nhật được nhà xe nào trong tuyến <span class="text-uppercase text-info">{{ $name }}</span>.</p>
-			<p class="text-center">Bạn có thể tạo tài khoản cá nhân và 
-			thêm mới, quản lí xe <span class="text-info">tại đây</span></p>
+			<p class="text-center" style="font-size: 20px">Danh sách xe trống<span class="text-uppercase text-info">{{ $name }}</span>.</p>
+			<p class="text-center" style="font-size: 20px">Nếu bạn sở hữu xe thì có thể tự thêm theo hướng dẫn <span class="text-info">tại đây</span></p>
 		@endif
 	</div>
 	{{-- google ads --}}

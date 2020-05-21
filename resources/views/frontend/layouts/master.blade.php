@@ -72,7 +72,13 @@
     }
     $(document).ready(function($) {
 
-        $('#range-time-go').datetimepicker();
+        // $('#range-time-go').datetimepicker();
+        $('.time').datetimepicker({
+            format: 'LT'
+        });
+        $('.date').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
 
         @if(session('danger'))
            $.notify('{{session('danger')}}',{type:'danger'});
