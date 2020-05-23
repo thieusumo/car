@@ -22,12 +22,6 @@ function goBack() {
 }
 $(".menu-mobile").click(function(){
 	$(this).children('i').toggleClass('fa-align-right fa-bars');
-})
-$(".btn-y-cmt").click(function(event) {
-	$(".box-y-cmt").slideToggle(500);
-	$([document.documentElement, document.body]).animate({
-        scrollTop: $(".box-y-cmt").offset().top - 50
-    }, 2000);
 });
 $(".view-cmt").click(function(event) {
 	$([document.documentElement, document.body]).animate({

@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use View;
 use App\Models\Route;
+use View;
+use Auth;
+
 
 class ComposerProvider extends ServiceProvider
 {
@@ -28,6 +30,11 @@ class ComposerProvider extends ServiceProvider
         View::composer('*',function($view){
             $route = Route::active()->get();
             $view->with('route_composer',$route);
+        });
+
+        View::composer('*', function($view){
+            $data['customer_composer'] = Auth::guard('customer')->check() ? Auth::guard('customer')->user() : null;
+            $view->with($data);
         });
     }
 }

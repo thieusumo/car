@@ -27,13 +27,36 @@ $(".more-image").click(function(){
 });
 $(".image-next").click(function(){
 	pos++;
-	if(pos == count) pos = 0;
+	if(pos == ci) pos = 0;
 	let src = $("#img-"+pos).attr('src');
 	$("#image-gallery-image").attr("src",src);
 });
 $(".image-prev").click(function(){
 	pos--;
-	if(pos == -1) pos = count;
+	if(pos == -1) pos = ci;
 	let src = $("#img-"+pos).attr('src');
 	$("#image-gallery-image").attr("src",src);
+});
+
+$(".btn-y-cmt").click(function(event) {
+
+	var customer_name = $(".customer_name").text();
+	if(customer_name == "")
+	{
+		$(".err-cmt").html('<span class="text-danger">Vui lòng tạo tài khoản trước khi bình luận</span>');
+		$("#registryModal").modal({backdrop: 'static'});
+	}else{
+
+		$(".box-y-cmt").slideToggle(500);
+		$([document.documentElement, document.body]).animate({
+	        scrollTop: $(".box-y-cmt").offset().top - 50
+	    }, 2000);
+	}
+});
+$("input[name=ques]").focus(function(){
+	var customer_name = $(".customer_name").text();
+	if(customer_name == ""){
+		$(".err-cmt").html('<span class="text-danger">Vui lòng tạo tài khoản trước khi bình luận</span>');
+		$("#registryModal").modal({backdrop: 'static'});
+	}
 });

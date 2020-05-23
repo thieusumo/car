@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'vi',
 
     /*
     |--------------------------------------------------------------------------
@@ -177,7 +177,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         App\Providers\ComposerProvider::class,
-        Tightenco\Ziggy\ZiggyServiceProvider::class
+        Tightenco\Ziggy\ZiggyServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
 
     ],
 

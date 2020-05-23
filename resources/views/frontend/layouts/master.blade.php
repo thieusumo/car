@@ -6,17 +6,8 @@
     <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8" />
-    <meta name="keywords"
-        content="Xe Nam Dinh, Xe Nghia Hung" />
-    <script>
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
-
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
+    <meta name="keywords" content="Xe Nam Dinh, Xe Nghia Hung" />
+    
     <!-- //Meta tag Keywords -->
 
     <!-- Custom-Files -->
@@ -46,9 +37,12 @@
 </head>
 
 <body>
+
     @include('frontend.layouts.partials.login-modal')
     @include('frontend.layouts.partials.register-modal')
+
     <div class="loader"></div>
+
     <span class="content-body">
         @include('frontend.layouts.partials.header')
         @yield('content')
@@ -80,11 +74,30 @@
             format: 'YYYY-MM-DD'
         });
 
+        var is_modal = "";
+
+        @if(count($errors) > 0)
+            var errors = {!! $errors !!};
+            var is_modal = (errors.is_modal) ? errors.is_modal[0] : "";
+        @endif
+
+        if(is_modal != ""){
+            // $("#"+is_modal).modal({backdrop: 'static'});
+            displayModal(is_modal);
+        }
+        @if(session('error_login'))
+            displayModal('loginModal');
+        @endif
+
         @if(session('danger'))
            $.notify('{{session('danger')}}',{type:'danger'});
         @elseif(session('success'))
             $.notify('{{session('success')}}',{type:'success'});
         @endif
+
+        function displayModal(id_modal){
+            $("#"+id_modal).modal({backdrop: "static"});
+        }
 
     
 

@@ -8,10 +8,24 @@ use App\Models\TypeCar;
 use App\Models\Car;
 use App\Models\Menu;
 use DataTables;
+use App\Models\Rating;
+use App\Repositories\QuestionRepository;
+use App\Repositories\RatingRepository;
 
 
 class PageController extends Controller
 {
+    protected $question;
+    protected $rating;
+
+    public function __construct(
+        QuestionRepository $question,
+        RatingRepository $rating
+    )
+    {
+        $this->question = $question;
+        $this->rating = $rating;
+    }
     public function index(){
         $cars = Car::join('route',function($join){
             $join->on('cars.route_id','route.id');
@@ -51,6 +65,7 @@ class PageController extends Controller
                 if($car_info->count() == 0)
                     abort(404);
                 $data['car'] = $car_info->first();
+                $data['comment_list'] = Rating::where(['car_id'=>$data['car']->id,'active'=>1])->with('customers')->get();
                 return view('frontend.car.car-detail',$data);
             }
                 
@@ -71,12 +86,15 @@ class PageController extends Controller
                 if($car_info->count() == 0)
                     abort(404);
                 $data['car'] = $car_info->first();
+                $input['id'] = $data['car']->id;
+                $data['comment_list'] = $this->rating->getAll($input);
+                $data['question'] = $this->question->activeQuestion();
+                $data['rating_percent'] = $this->rating->percentStar($input);
+                // return $data['rating_percent'];
+
                 return view('frontend.car.car-detail',$data);
             }
         }
-
-            
-
     }
     public function carType($type){
         return 'ok';

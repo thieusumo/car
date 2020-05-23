@@ -1,4 +1,10 @@
 /*home*/
+.modal-content{
+    border-radius: 0.5rem!important;
+}
+.form-group{
+    margin-bottom: .5rem!important;
+}
 .style-banner{
     padding-top: 0!important;
 }

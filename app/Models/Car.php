@@ -8,18 +8,14 @@ class Car extends Model
 {
     protected $table = 'cars';
     protected $fillable = [
-    	'name',
-    	'slug',
-    	'station_go',
-    	'station_back',
-    	'time_go',
-    	'time_back',
-    	'route_id',
-    	'line',
-    	'phone',
-    	'address',
+    	'name', 'slug', 
+        'station_go', 'station_back',
+    	'time_go','time_back',
+    	'route_id','line',
+    	'phone','address',
     	'active',
-        'car_type'
+        'car_type',
+        'stars', 'total_star'
     ];
 
     public function scopeActive($query){

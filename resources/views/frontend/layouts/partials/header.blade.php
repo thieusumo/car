@@ -15,8 +15,13 @@
                     <input type="checkbox" id="drop" />
                     <ul class="menu">
                         {!! \App\Models\Menu::getMenu()!!}
-                        <li><a class="text-uppercase" onclick="showModal('login-modal','register-modal')" href="javascript:void(0)">Đăng Nhập</a></li>
-                        <li><a class="text-uppercase" onclick="showModal('register-modal','login-modal')" href="javascript:void(0)">Đăng kí</a></li>
+                        @if(!$customer_composer)
+                            <li><a class="text-uppercase" onclick="showModal('loginModal','registryModal')" href="javascript:void(0)">Đăng Nhập</a></li>
+                            <li><a class="text-uppercase" onclick="showModal('registryModal','loginModal')" href="javascript:void(0)">Đăng kí</a></li>
+                        @else
+                            <li><a class="text-uppercase"  href="javascript:void(0)"><span class="customer_name">{{ $customer_composer->name }}</span></a></li>
+                            <li><a class="text-uppercase"  href="{{ route('frontend.logout') }}">Logout</a></li>
+                        @endif
                     </ul>
                 </nav>
             </div>
