@@ -36,10 +36,15 @@ class QuestionRepositoryEloquent extends BaseRepository implements QuestionRepos
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function activeQuestion()
+    public function activeQuestion(array $input,$take=0)
     {
-        $questions = $this->model->active()->with('answer')->get();
-        return $questions;
+        $questions = $this->model->active()->where('car_id',$input['id'])->with('answer')->latest();
+        if($take != 0 ){
+            $questions->take(5)->skip(0);
+        }
+        $data['questions'] = $questions->get();
+        $data['total'] = $questions->count();
+        return $data;
     }
     public function store(array $input){
         $input['customer_id'] = Auth::guard('customer')->user()->id;

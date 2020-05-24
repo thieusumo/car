@@ -87,10 +87,9 @@ class PageController extends Controller
                     abort(404);
                 $data['car'] = $car_info->first();
                 $input['id'] = $data['car']->id;
-                $data['comment_list'] = $this->rating->getAll($input);
-                $data['question'] = $this->question->activeQuestion();
+                $data['comment_list'] = $this->rating->getAll($input,10);
+                $data['question'] = $this->question->activeQuestion($input,5);
                 $data['rating_percent'] = $this->rating->percentStar($input);
-                // return $data['rating_percent'];
 
                 return view('frontend.car.car-detail',$data);
             }

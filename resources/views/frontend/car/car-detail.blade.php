@@ -21,13 +21,20 @@
 				<h4>{{ $car->name }}</h4><span hidden id="c-id">{{ $car->id }}</span>
 				<p>
 					@for($i=1;$i<6;$i++)
-					    @if($i > $car->stars )
-							<i class="fa fa-star-o" aria-hidden="true"></i>
+					    @if($i > intval($car->stars) )
+					    	<span style="position: relative;">
+								<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star star" style="position: absolute;width: {{ (($car->stars)-intval($car->stars))*100 }}%;top: 0px;left: 0px;overflow: hidden" aria-hidden="true"></i></span>
 						@else
 							<i class="fa fa-star star" aria-hidden="true"></i>
 						@endif
 					@endfor
-					<span class="view-cmt text-info">(Xem 4 đánh giá)</span>
+					<span class="view-cmt text-info">
+						(
+						@if($comment_list['total'] > 0)
+							Xem
+						@endif
+							{{ $comment_list['total'] }} đánh giá )
+					</span>
 				</p>
 				<p>Tuyến: <b>{{ $name }}</b></p>
 				<p>Lộ Trình: <b>{{ $car->line }}</b></p>
@@ -107,20 +114,23 @@
 		</div>
 
 		</div>
-		<h5 class="title-content">Hỏi, đáp về nhà xe</h5>
+		<h5 class="title-content">Hỏi, đáp về nhà xe<sup class="text-danger">({{ $question['total'] }})</sup></h5>
 		<div class="detail-content">
-			@foreach($question as $q)
+			@foreach($question['questions'] as $q)
 				<div class="ans-box">
-					<span><b>{{ $q->question }}</b></span>
+					<span class="fa fa-question-circle-o"> {!! shorterString($q->question,30) !!}</span>
 					@if($q->answer != null)
 						<p class="ans-content">
+							<span class="fa fa-hand-o-right"></span>
 							{!! shorterString($q->answer->answer,30) !!}
 						</p>
 						<i class="ans-content">Trả lời ngày {{ $q->answer->updated_at }}</i>
 					@endif
 				</div>
 			@endforeach
-			<span class="text-primary">Xem tất cả câu hỏi đã được trả lời <i class="fa fa-motorcycle" aria-hidden="true"></i></span>
+			@if($question['total'] > 0 && $question['total'] > 5)
+				<span class="text-primary">Xem tất cả câu hỏi đã được trả lời <i class="fa fa-motorcycle" aria-hidden="true"></i></span>
+			@endif
 			<div class="input-group my-2">
 			    <input type="text" name="ques" class="form-control form-control-sm" placeholder="Hãy đặt câu hỏi liên quan đến nhà xe">
 				<div class="input-group-append">
@@ -142,7 +152,7 @@
 			</h6>
 				
 			<textarea id="u-cmt" class="form-control form-control-sm" rows="5" placeholder="Nhận xét của bạn"></textarea>
-			Mẫu: 
+			Mẫu nhận xét: 
 			<span class="badge badge-danger ml-2 ex-cmt">Phục vụ kém</span>
 			<span class="badge badge-danger ml-2 ex-cmt">Chất lượng xe kém</span>
 			<span class="badge badge-info ml-2 ex-cmt">Chất lượng tốt</span>
@@ -152,17 +162,18 @@
 			<input type="button" class="btn btn-warning btn-sm my-1 sub-cmt" value="Gửi nhận xét" name="">
 		</div>
 
-		<h5 class="title-content">khách hàng nhận xét</h5>
+		<h5 class="title-content">khách hàng nhận xét<sup class="text-danger">({{ $comment_list['total'] }})</sup></h5>
 		<div class="detail-content" >
 			<div class="row text-center pb-2 ans-box">
 				<div class="col-md-4">
 					<span>Đánh giá trung bình</span>
-					<h4 class="text-danger">{{ $car->stars }}/5</h4>
+					<h4 class="text-danger">{{ $car->stars==intval($car->stars)?intval($car->stars):$car->stars }}/5</h4>
 					@for($i=1;$i<6;$i++)
-						@if($i<4)
-							<i class="fa fa-star star" aria-hidden="true"></i>
+					    @if($i > intval($car->stars) )
+					    	<span style="position: relative;">
+								<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star star" style="position: absolute;width: {{ (($car->stars)-intval($car->stars))*100 }}%;top: 0px;left: 0px;overflow: hidden" aria-hidden="true"></i></span>
 						@else
-							<i class="fa fa-star-o" aria-hidden="true"></i>
+							<i class="fa fa-star star" aria-hidden="true"></i>
 						@endif
 					@endfor
 				</div>
@@ -184,7 +195,7 @@
 					<button class="btn btn-sm btn-warning btn-y-cmt">Viết nhận xét của bạn</button>
 				</div>
 			</div>
-			@foreach($comment_list as $cmt)
+			@foreach($comment_list['result'] as $cmt)
 				<div class="my-2 px-2 box-cmt">
 				<div class="row">
 					<div class="col-2 p-0 m-0">
@@ -209,10 +220,11 @@
 						</p>
 					</div>
 				</div>
-				
 			</div>
 			@endforeach
-			<span class="text-primary">Xem tất cả nhận xét <i class="fa fa-motorcycle" aria-hidden="true"></i></span>
+			@if($comment_list['total'] > 0 && $comment_list['total'] > 10)
+				<span class="text-primary">Xem tất cả nhận xét <i class="fa fa-motorcycle" aria-hidden="true"></i></span>
+			@endif
 		</div>
 	</div>
 	{{-- google ads --}}

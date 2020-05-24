@@ -11,6 +11,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface RatingRepository extends RepositoryInterface
 {
-    public function getAll(array $input);
+    public function getAll(array $input,$take=0);
     public function percentStar(array $input);
 }

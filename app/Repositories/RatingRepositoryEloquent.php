@@ -34,11 +34,16 @@ class RatingRepositoryEloquent extends BaseRepository implements RatingRepositor
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    public function getAll(array $input)
+    public function getAll(array $input,$take=0)
     {
-        $result = $this->model->where(['car_id'=>$input['id'],'active'=>1])->with('customers')->get();
+        $result = $this->model->where(['car_id'=>$input['id'],'active'=>1])->with('customers')->latest();
+        if($take != 0){
+            $result->take($take)->skip(0);
+        }
+        $data['result'] = $result->get();
+        $data['total'] = $result->count();
 
-        return $result;
+        return $data;
     }
     public function percentStar(array $input)
     {
@@ -49,7 +54,14 @@ class RatingRepositoryEloquent extends BaseRepository implements RatingRepositor
             'rating_4' => 0,
             'rating_3' => 0,
             'rating_2' => 0,
-            'rating_1' => 0
+            'rating_1' => 0,
+        ];
+        $data = [
+            'percent_5' => 0,
+            'percent_4' => 0,
+            'percent_3' => 0,
+            'percent_2' => 0,
+            'percent_1' => 0,
         ];
 
         foreach ($ratings as $key => $rating) {
@@ -73,12 +85,14 @@ class RatingRepositoryEloquent extends BaseRepository implements RatingRepositor
         }
 
         $total_rating = $ratings->count();
-        $data['percent_5'] = round($arr['rating_5']/$total_rating*100);
-        $data['percent_4'] = round($arr['rating_4']/$total_rating*100);
-        $data['percent_3'] = round($arr['rating_3']/$total_rating*100);
-        $data['percent_2'] = round($arr['rating_2']/$total_rating*100);
-        $data['percent_1'] = round($arr['rating_1']/$total_rating*100);
 
+        if($total_rating > 0){
+            $data['percent_5'] = round($arr['rating_5']/$total_rating*100);
+            $data['percent_4'] = round($arr['rating_4']/$total_rating*100);
+            $data['percent_3'] = round($arr['rating_3']/$total_rating*100);
+            $data['percent_2'] = round($arr['rating_2']/$total_rating*100);
+            $data['percent_1'] = round($arr['rating_1']/$total_rating*100);
+        }
         return $data;
     }
 }

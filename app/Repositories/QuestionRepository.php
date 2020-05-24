@@ -11,6 +11,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface QuestionRepository extends RepositoryInterface
 {
-    public function activeQuestion();
+    public function activeQuestion(array $input,$take=0);
     public function store(array $input);
 }
