@@ -20,13 +20,16 @@ class AuthController extends Controller
 		$this->customer = $customer;
 	}
     public function login(LoginRequest $request){
+        
     	$input = $request->all();
+        $remember = $request->has('remember_me') ? true : false;
 
         $customer = Customer::where('email',$input['customer']['email'])->first();
 
-        if(Hash::check($input['customer']['password'],$customer->password) )
+        if (Auth::guard('customer')->attempt(['email' => $input['customer']['email'], 'password' => $input['customer']['password']], $remember))
         {
             Auth::guard('customer')->login($customer);
+            $request->session()->flash('success','Đăng nhập thành công!');
 
         }else{
             $request->session()->flash('customer_email',$input['customer']['email']);
@@ -40,11 +43,12 @@ class AuthController extends Controller
 
     	$result = $this->customer->store($input);
 
-    	if(!$result){	}
+    	if(!$result){}
     	else{
     		Auth::guard('customer')->login($result);
+            $request->session()->flash('success','Đăng nhập thành công!');
     	}
-    	return redirect()->back();
+    	return back();
     }
     public function logout(){
 

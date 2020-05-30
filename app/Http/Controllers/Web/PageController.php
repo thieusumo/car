@@ -65,7 +65,11 @@ class PageController extends Controller
                 if($car_info->count() == 0)
                     abort(404);
                 $data['car'] = $car_info->first();
-                $data['comment_list'] = Rating::where(['car_id'=>$data['car']->id,'active'=>1])->with('customers')->get();
+                $input['id'] = $data['car']->id;
+                $data['comment_list'] = $this->rating->getAll($input,10);
+                $data['question'] = $this->question->activeQuestion($input,5);
+                $data['rating_percent'] = $this->rating->percentStar($input);
+                
                 return view('frontend.car.car-detail',$data);
             }
                 

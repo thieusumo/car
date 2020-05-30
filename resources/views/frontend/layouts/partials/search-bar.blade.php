@@ -1,4 +1,4 @@
-<section class="search-sec mt-3">
+<section class="search-sec my-2">
     <div class="container">
         <form action="{{ route('car.search') }}" method="get" novalidate="novalidate">
             <div class="row">

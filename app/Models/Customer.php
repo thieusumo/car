@@ -13,7 +13,7 @@ class Customer extends Authenticatable
     protected $guard = 'customer';
 
     public $fillable = [
-    	'name','email','password'
+    	'name','email','password','provider', 'provider_id'
     ];
 
     protected $hidden = [

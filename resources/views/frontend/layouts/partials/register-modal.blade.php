@@ -39,10 +39,15 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <button type="submit" class="btn button-style-w3" style="background-color: blue;color: white">Facebook</button>
+                            <a href="{{ route('customer.socialite','facebook') }}" title="">
+                                <button type="button" class="btn button-style-w3" style="background-color: blue;color: white">Facebook</button>
+                            </a>
+                            
                         </div>
                         <div class="col-6">
-                            <button type="submit" class="btn button-style-w3" style="background-color: red;color: white">Google<sup>+</sup></button>
+                            <a href="{{ route('customer.socialite','google') }}" _blank='top' title="">
+                                <button type="button" class="btn button-style-w3" style="background-color: red;color: white">Google<sup>+</sup></button>
+                            </a>
                         </div>
                     </div>
                     <p class="text-center dont-do text-style-w3ls">Đã có tài khoản?

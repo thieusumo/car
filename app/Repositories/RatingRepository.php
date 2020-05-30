@@ -13,4 +13,5 @@ interface RatingRepository extends RepositoryInterface
 {
     public function getAll(array $input,$take=0);
     public function percentStar(array $input);
+    public function listStar(array $input);
 }

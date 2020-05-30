@@ -31,12 +31,13 @@
         rel="stylesheet"> --}}
     <!-- //Web-Fonts -->
     @yield('style')
-    <style type="text/css" media="screen">
-
-    </style>
+    {{-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v7.0&appId=683890102171898&autoLogAppEvents=1"></script> --}}
+    
 </head>
 
 <body>
+    <div id="fb-root"></div>
+
 
     @include('frontend.layouts.partials.login-modal')
     @include('frontend.layouts.partials.register-modal')
@@ -67,7 +68,7 @@
     $(document).ready(function($) {
 
         // $('#range-time-go').datetimepicker();
-        $('.time').datetimepicker({
+        $('.time, .clock_go, .tc_clock_go, .clock_back, .tc_clock_back').datetimepicker({
             format: 'LT'
         });
         $('.date').datetimepicker({

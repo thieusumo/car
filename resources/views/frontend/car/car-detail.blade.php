@@ -9,9 +9,9 @@
 @section('content')
 @include('frontend.layouts.partials.image-modal')
 @include('frontend.layouts.partials.modal')
-@include('frontend.layouts.partials.google-ads-2')
-<div class="row mt-5" style="margin-right: 0px; margin-left: 0px">
-		@include('frontend.layouts.partials.google-ads-1')
+@include('frontend.layouts.partials.google-ads-top')
+<div class="row mt-1" style="margin-right: 0px; margin-left: 0px">
+		@include('frontend.layouts.partials.google-ads-left')
 	<div class="col-md-8 content-detail">
 		<div class="row detail-content">
 			<div class="col-md-6 col-sm-12 text-center">
@@ -51,7 +51,14 @@
 					<i class="fa fa-comment" aria-hidden="true"></i>
 						Phản ánh thông tin nhà xe không chính xác
 				</p>
-				<button type="button" class="btn btn-sm btn-warning text-blue">Chia sẻ lên Facebook</button>
+				@php
+					// $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+					$actual_link = 'https://www.facebook.com/thieu.100/';
+				@endphp
+
+				<div class="fb-share-button" data-href="https://stackoverflow.com/questions/22037021/custom-facebook-share-button" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F22037021%2Fcustom-facebook-share-button&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+
+				<div class="fb-share-button" data-href="{{ $actual_link }}" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ str_replace(':','%3A',str_replace('/','%2F',$actual_link)) }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
 			</div>
 		</div>
 		<h5 class="title-content">Một số hình ảnh nhà xe</h5>
@@ -118,10 +125,10 @@
 		<div class="detail-content">
 			@foreach($question['questions'] as $q)
 				<div class="ans-box">
-					<span class="fa fa-question-circle-o"> {!! shorterString($q->question,30) !!}</span>
+					<span class="fa fa-question-circle-o text-danger"></span><span class=""> {!! shorterString($q->question,30) !!}</span>
 					@if($q->answer != null)
 						<p class="ans-content">
-							<span class="fa fa-hand-o-right"></span>
+							<span class="fa fa-hand-o-right text-primary"></span>
 							{!! shorterString($q->answer->answer,30) !!}
 						</p>
 						<i class="ans-content">Trả lời ngày {{ $q->answer->updated_at }}</i>
@@ -129,7 +136,7 @@
 				</div>
 			@endforeach
 			@if($question['total'] > 0 && $question['total'] > 5)
-				<span class="text-primary">Xem tất cả câu hỏi đã được trả lời <i class="fa fa-motorcycle" aria-hidden="true"></i></span>
+				<span class="text-primary"><a href="{{ route('frontend.customer.all_question',$car->id) }}" title="">Xem tất cả câu hỏi đã được trả lời <i class="fa fa-motorcycle" aria-hidden="true"></i></a></span>
 			@endif
 			<div class="input-group my-2">
 			    <input type="text" name="ques" class="form-control form-control-sm" placeholder="Hãy đặt câu hỏi liên quan đến nhà xe">
@@ -151,7 +158,7 @@
 				@endfor
 			</h6>
 				
-			<textarea id="u-cmt" class="form-control form-control-sm" rows="5" placeholder="Nhận xét của bạn"></textarea>
+			<textarea id="u-cmt" class="form-control form-control-sm" name="comment" rows="5" placeholder="Nhận xét của bạn"></textarea>
 			Mẫu nhận xét: 
 			<span class="badge badge-danger ml-2 ex-cmt">Phục vụ kém</span>
 			<span class="badge badge-danger ml-2 ex-cmt">Chất lượng xe kém</span>
@@ -196,7 +203,7 @@
 				</div>
 			</div>
 			@foreach($comment_list['result'] as $cmt)
-				<div class="my-2 px-2 box-cmt">
+				<div class="my-2 px-2">
 				<div class="row">
 					<div class="col-2 p-0 m-0">
 						<figure class="text-center">
@@ -223,98 +230,26 @@
 			</div>
 			@endforeach
 			@if($comment_list['total'] > 0 && $comment_list['total'] > 10)
-				<span class="text-primary">Xem tất cả nhận xét <i class="fa fa-motorcycle" aria-hidden="true"></i></span>
+				<span class="text-primary"><a href="{{ route('frontend.customer.all_rating',$car->id) }}" title="">Xem tất cả nhận xét <i class="fa fa-motorcycle" aria-hidden="true"></i></a></span>
 			@endif
 		</div>
 	</div>
 	{{-- google ads --}}
-		@include('frontend.layouts.partials.google-ads-1')
+		@include('frontend.layouts.partials.google-ads-right')
 	{{-- end google ads --}}
 </div>
 </section>
-	
+	@include('frontend.layouts.partials.google-ads-bottom')
 @endsection
+@routes
 @section('script')
 <script>
 	var ci = {{ $count }};
 	$(document).ready(function() {
-		var index = 0;
-		$(".vote-star").click(function(){
-			index = $(this).index();
-			for(var i = 0;i<5;i++){
-				if( i < index){
-					$(".vote-star").eq(i).addClass('fa-star star').removeClass('fa-star-o');
-				}else{
-					$(".vote-star").eq(i).addClass('fa-star-o').removeClass('fa-star star');
-				}
-			}
-		});
-		$(".ex-cmt").click(function(){
-			var text = $(this).text();
-			var u_cmt = $("#u-cmt");
-			u_cmt.val(u_cmt.val()+ " "+ text);
-		});
-		$(".sub-cmt").click(function(){
-			if(index == 0){
-				$.notify('Chọn số sao',{type:'danger'});
-				return;
-			}else{
-				var u_cmt = $("#u-cmt").val();
 
-				$.ajax({
-					url: '{{ route('frontend.customer.rating') }}',
-					type: 'POST',
-					dataType: 'html',
-					data: {
-						star: index,
-						comment: u_cmt,
-						_token: '{{ csrf_token() }}',
-						car_id: $("#c-id").text()
-					},
-				})
-				.done(function(data) {
-					data = JSON.parse(data);
-					$.notify(data.message,{type:data.status});
-					console.log(data);
-				});
-			}
-		});
-		$(".sub-que").click(function(){
-			var question = $("input[name=ques]").val();
-			if(question == "")
-			{
-				$.notify('Hãy nhập câu hỏi của bạn',{type:'danger'});
-				return;
-			}else{
-				$.ajax({
-					url: '{{ route('frontend.customer.send_question') }}',
-					type: 'POST',
-					dataType: 'html',
-					data: {
-						car_id: $("#c-id").text(),
-						question: question,
-						_token: '{{ csrf_token() }}'
-					},
-				})
-				.done(function(data) {
-					data = JSON.parse(data);
-					$.notify(data.message,{type:data.status});
-					if(data.status == 'success'){
-						$("input[name=ques]").val("");
-					}
-					console.log(data);
-				})
-				.fail(function() {
-					console.log("error");
-				})
-				.always(function() {
-					console.log("complete");
-				});
-				
-			}
-		})
 	});
 </script>
+
 <script src="{{ asset('web/js/car_detail.js') }}" type="text/javascript"></script>
 
 @endsection

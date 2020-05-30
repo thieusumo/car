@@ -27,169 +27,310 @@
 </style>
 @endsection
 @section('content')
-@include('frontend.layouts.partials.google-ads-2')
-<div class="row mt-5" style="margin-right: 0px; margin-left: 0px">
-		@include('frontend.layouts.partials.google-ads-1')
+@include('frontend.layouts.partials.google-ads-top')
+<div class="row mt-2" style="margin-right: 0px; margin-left: 0px">
+		@include('frontend.layouts.partials.google-ads-left')
 	
 	<div class="col-md-8 content-detail">
-		<form accept-charset="utf-8" enctype="multipart/form-data">
-			<h5 class="title-content text-center">Nhập Thông Tin Nhà Xe</h5>
-			<div class="row detail-content">
-				<div class="col-md-12">
-					<div class="form-group row">
-						<div class="col-md-6 mt-1">
-							<input type="file" name="ava" id="ava" hidden>
-							<button type="button" onclick="changeImage(this,'ava','preview-image','btn-remove-image')" class="btn btn-sm btn-warning">Tải lên ảnh đại diện</button>
-							<button onclick="removeImage(this,'preview-image')" style="display: none" class="btn btn-sm btn-danger btn-remove-image ml-2">Xóa</button>
-						</div>
-						<div class="col-md-6 mt-1">
-							<img src="" id="preview-image" class="w-50" alt="">
-						</div>
-						
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="required" for="name">Tên Nhà Xe</label>
-						<input type="text" class="form-control form-control-sm" name="name" id="name" value="" placeholder="Nhập tên nhà xe">
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="required" for="license_plate">Biển số</label>
-						<input type="text" class="form-control form-control-sm" name="license_plate" id="license_plate" value="" placeholder="Nhập biển số">
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12">
-					<div class="form-group">
-						<label class="required" for="route_id">Tuyến</label>
-						<select name="route_id" class="form-control form-control-sm">
-							@foreach($routes as $route)
-								<option value="{{ $route->id }}">{{ $route->name }}</option>
-							@endforeach
-						</select>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12">
-					<div class="form-group">
-						<label class="required" for="line">Lộ Trình</label>
-						<input type="text" class="form-control form-control-sm" name="line" id="line" value="" placeholder="Ví dụ: Nghĩa Hải-Cầu Ông Kiểm-Nghĩa Hưng-Nam Định-Giáp Bát">
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12">
-					<div class="form-group">
-						<label class="required" for="address">Địa Chỉ Nhà Xe</label>
-						<input type="text" class="form-control form-control-sm" name="address" id="address" value="" placeholder="Nhập địa chỉ nhà xe">
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12">
-					<div class="form-group">
-						<label class="required" for="car_type">Loại Xe</label>
-						<select name="car_type" class="form-control form-control-sm">
-							@foreach($type_cars as $type)
-								<option value="{{ $type->id }}">{{ $type->name }}</option>
-							@endforeach
-						</select>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12">
-					<div class="form-group">
-						<label class="required" for="station_go">Bến Đi</label>
-						<input type="text" class="form-control form-control-sm" name="station_go" id="station_go" value="" placeholder="Nhập bến đi">
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12">
-					<div class="form-group">
-						<label class="required" for="station_back">Bến Tới</label>
-						<input type="text" class="form-control form-control-sm" name="station_back" id="station_back" value="" placeholder="Nhập bến tới">
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12">
-					<div class="form-group">
-						<label class="required" for="phone_1">Liên Hệ 1</label>
-						<input type="number" class="form-control form-control-sm" name="phone[]" id="phone_1" value="" placeholder="Nhập số điện thoại chính">
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12">
-					<div class="form-group">
-						<label for="phone_2">Liên Hệ 2</label>
-						<input type="number" class="form-control form-control-sm" name="phone[]" id="phone_2" value="" placeholder="Nhập số điện thoại 2">
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12">
-					<div class="form-group">
-						<label for="phone_3">Liên Hệ 3</label>
-						<input type="number" class="form-control form-control-sm" name="phone[]" id="phone_3" value="" placeholder="Nhập số điện thoại 3">
-					</div>
-				</div>
-				<div class="col-md-12">
-					<label for="">Thời Gian Đi</label>
-					<div class="form-group">
-						<label class="float-left required">Giờ đi: </label>
-						<input type="text" name="" class="form-control form-control-sm col-md-3 float-left"><br><br>
-						<div style="">
-							<label class="required">Ngày đi: </label><span class="rounded bg-primary text-center px-1 text-white time_go">Tất cả các ngày</span><br>
-							@for($i=1;$i<32;$i++)
-							<span class="bg-primary rounded text-center text-white date_go">
-								{{ $i }}
-							</span>
+		<ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#xe-khach">Xe Khách</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tien-chuyen">Xe Tiện chuyến</a>
+            </li>
+        </ul>
+        <div class="tab-content" style="overflow-y: auto">
+            <div id="xe-khach" class="tab-pane active"><br>
+                <form accept-charset="utf-8" enctype="multipart/form-data">
+					<div class="row detail-content">
+						<div class="col-md-12">
+							<div class="form-group row">
+								<div class="col-md-6 mt-1">
+									<input type="file" name="ava" id="ava" hidden>
+									<button type="button" onclick="changeImage(this,'ava','preview-image','btn-remove-image')" class="btn btn-sm btn-warning">Tải lên ảnh đại diện</button>
+									<button type="button" onclick="removeImage(this,'preview-image')" style="display: none" class="btn btn-sm btn-danger btn-remove-image ml-2">Xóa</button>
+								</div>
+								<div class="col-md-6 mt-1">
+									<img src="" id="preview-image" class="w-50" alt="">
+								</div>
 								
-							@endfor
+							</div>
 						</div>
-						
-					</div>
-				</div>
-				<div class="col-md-12">
-					<label for="">Thời Gian Về</label>
-					<div class="form-group">
-						<label class="float-left required">Giờ về: </label>
-						<input type="text" name="" class="form-control form-control-sm col-md-3 float-left"><br><br>
-						<div style="">
-							<label class="required">Ngày về: </label><span class="rounded bg-primary text-center px-1 text-white time_back">Tất cả các ngày</span><br>
-							@for($i=1;$i<32;$i++)
-							<span class="bg-primary rounded text-center text-white date_back">
-								{{ $i }}
-							</span>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="required" for="name">Tên Nhà Xe</label>
+								<input type="text" class="form-control form-control-sm" name="name" id="name" value="" placeholder="Nhập tên nhà xe">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="required" for="license_plate">Biển số</label>
+								<input type="text" class="form-control form-control-sm" name="license_plate" id="license_plate" value="" placeholder="Nhập biển số">
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label class="required" for="route_id">Tuyến</label>
+								<select name="route_id" class="form-control form-control-sm">
+									@foreach($routes as $route)
+										<option value="{{ $route->id }}">{{ $route->name }}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label class="required" for="line">Lộ Trình</label>
+								<input type="text" class="form-control form-control-sm" name="line" id="line" value="" placeholder="Ví dụ: Nghĩa Hải-Cầu Ông Kiểm-Nghĩa Hưng-Nam Định-Giáp Bát">
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label class="required" for="address">Địa Chỉ Nhà Xe</label>
+								<input type="text" class="form-control form-control-sm" name="address" id="address" value="" placeholder="Nhập địa chỉ nhà xe">
+							</div>
+						</div>
+						{{-- <div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label class="required" for="car_type">Loại Xe</label>
+								<select name="car_type" class="form-control form-control-sm">
+									@foreach($type_cars as $type)
+										<option value="{{ $type->id }}">{{ $type->name }}</option>
+									@endforeach
+								</select>
+							</div>
+						</div> --}}
+						<input type="hidden" name="car_type" value="2">
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label class="required" for="station_go">Bến Đi</label>
+								<input type="text" class="form-control form-control-sm" name="station_go" id="station_go" value="" placeholder="Nhập bến đi">
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label class="required" for="station_back">Bến Tới</label>
+								<input type="text" class="form-control form-control-sm" name="station_back" id="station_back" value="" placeholder="Nhập bến tới">
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label class="required" for="phone_1">Liên Hệ 1</label>
+								<input type="number" class="form-control form-control-sm" name="phone[]" id="phone_1" value="" placeholder="Nhập số điện thoại chính">
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label for="phone_2">Liên Hệ 2</label>
+								<input type="number" class="form-control form-control-sm" name="phone[]" id="phone_2" value="" placeholder="Nhập số điện thoại 2">
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label for="phone_3">Liên Hệ 3</label>
+								<input type="number" class="form-control form-control-sm" name="phone[]" id="phone_3" value="" placeholder="Nhập số điện thoại 3">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<label for="">Thời Gian Đi</label>
+							<div class="form-group">
+								<label class="float-left required">Giờ đi: </label>
+								<input type="text" name="clock_go" class="form-control form-control-sm col-md-3 float-left clock_go">
+								<i>AM: sáng PM: chiều</i><br><br>
+								<div style="">
+									<label class="required">Ngày đi: </label><span class="rounded bg-primary text-center px-1 text-white time_go">Tất cả các ngày</span><br>
+									@for($i=1;$i<32;$i++)
+									<span class="bg-primary rounded text-center text-white date_go">
+										{{ $i }}
+									</span>
+										
+									@endfor
+								</div>
 								
-							@endfor
+							</div>
 						</div>
-						
-					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="form-group">
-						<label for="">Tải lên ảnh chụp xe</label><br>
-						<i class="text-danger">Giúp quảng bá xe của bạn tốt hơn</i><br>
-						<button type="button" onclick="changeMultiImage('more-image')" class="btn btn-sm btn-warning">Tải lên</button>
-						<input type="file" hidden id="more-image" name="more-image[]" multiple>
-						<div id="more-image-box" class="rounded">
-							
+						<div class="col-md-12">
+							<label for="">Thời Gian Về</label>
+							<div class="form-group">
+								<label class="float-left required">Giờ về: </label>
+								<input type="text" name="clock_back" class="form-control form-control-sm col-md-3 float-left clock_back">
+								<i>AM: sáng PM: chiều</i><br><br>
+								<div style="">
+									<label class="required">Ngày về: </label><span class="rounded bg-primary text-center px-1 text-white time_back">Tất cả các ngày</span><br>
+									@for($i=1;$i<32;$i++)
+									<span class="bg-primary rounded text-center text-white date_back">
+										{{ $i }}
+									</span>
+										
+									@endfor
+								</div>
+								
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="">Tải lên ảnh chụp xe</label><br>
+								<i class="text-danger">Giúp quảng bá xe của bạn tốt hơn</i><br>
+								<button type="button" onclick="changeMultiImage('more-image')" class="btn btn-sm btn-warning">Tải lên</button>
+								<input type="file" hidden id="more-image" name="more-image[]" multiple>
+								<div id="more-image-box" class="rounded">
+									
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="">Thông Tin Thêm</label>
+								<textarea name="description" class="form-control form-control-sm" rows="3" placeholder="Ví dụ: Có nhà vệ sinh. khăn lạnh, nước uống,..."></textarea>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<button type="button" class="btn btn-sm btn-primary btn-submit">Xong</button>
+								<button type="button" class="btn btn-sm btn-danger float-right">Hủy</button>
+								
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="form-group">
-						<label for="">Thông Tin Thêm</label>
-						<textarea name="note" class="form-control form-control-sm" rows="3" placeholder="Ví dụ: Có nhà vệ sinh. khăn lạnh, nước uống,..."></textarea>
+				</form>
+            </div>
+            <div id="tien-chuyen" class="tab-pane fade"><br>
+                <form accept-charset="utf-8" enctype="multipart/form-data">
+					<div class="row detail-content">
+						<div class="col-md-12">
+							<div class="form-group row">
+								<div class="col-md-6 mt-1">
+									<input type="file" name="ava" id="tc-ava" hidden>
+									<button type="button" onclick="changeImage(this,'tc-ava','tc-preview-image','tc-btn-remove-image')" class="btn btn-sm btn-warning">Tải lên ảnh đại diện</button>
+									<button onclick="removeImage(this,'tc-preview-image')" type="button" style="display: none" class="btn btn-sm btn-danger tc-btn-remove-image ml-2">Xóa</button>
+								</div>
+								<div class="col-md-6 mt-1">
+									<img src="" id="tc-preview-image" class="w-50" alt="">
+								</div>
+								
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="required" for="name">Tên Nhà Xe</label>
+								<input type="text" class="form-control form-control-sm" name="name" id="name" value="" placeholder="Nhập tên nhà xe">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="required" for="license_plate">Biển số</label>
+								<input type="text" class="form-control form-control-sm" name="license_plate" id="license_plate" value="" placeholder="Nhập biển số">
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label class="required" for="address">Địa Chỉ Nhà Xe</label>
+								<input type="text" class="form-control form-control-sm" name="address" id="address" value="" placeholder="Nhập địa chỉ nhà xe">
+							</div>
+						</div>
+						<input type="hidden" name="car_type" value="1">
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label class="required" for="station_go">Bến Đi</label>
+								<input type="text" class="form-control form-control-sm" name="station_go" id="station_go" value="" placeholder="Nhập bến đi">
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label class="required" for="station_back">Bến Tới</label>
+								<input type="text" class="form-control form-control-sm" name="station_back" id="station_back" value="" placeholder="Nhập bến tới">
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label class="required" for="phone_1">Liên Hệ 1</label>
+								<input type="number" class="form-control form-control-sm" name="phone[]" id="phone_1" value="" placeholder="Nhập số điện thoại chính">
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label for="phone_2">Liên Hệ 2</label>
+								<input type="number" class="form-control form-control-sm" name="phone[]" id="phone_2" value="" placeholder="Nhập số điện thoại 2">
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<div class="form-group">
+								<label for="phone_3">Liên Hệ 3</label>
+								<input type="number" class="form-control form-control-sm" name="phone[]" id="phone_3" value="" placeholder="Nhập số điện thoại 3">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<label for="">Thời Gian Đi</label>
+							<div class="form-group">
+								<label class="float-left required">Giờ đi: </label>
+								<input type="text" name="clock_back" class="form-control form-control-sm col-md-3 float-left 
+								clock_back">
+								<i>AM: sáng PM: chiều</i>
+								<br><br>
+								<div style="">
+									<label class="required">Ngày đi: </label><span class="rounded bg-primary text-center px-1 text-white time_go">Tất cả các ngày</span><br>
+									@for($i=1;$i<32;$i++)
+									<span class="bg-primary rounded text-center text-white date_go">
+										{{ $i }}
+									</span>
+										
+									@endfor
+								</div>
+								
+							</div>
+						</div>
+						<div class="col-md-12">
+							<label for="">Thời Gian Về</label>
+							<div class="form-group">
+								<label class="float-left required">Giờ về: </label>
+								<input type="text" name="tc_clock_back" class="form-control form-control-sm col-md-3 float-left tc_clock_back">
+								<i>AM: sáng PM: chiều</i>
+								<br><br>
+								<div style="">
+									<label class="required">Ngày về: </label><span class="rounded bg-primary text-center px-1 text-white time_back">Tất cả các ngày</span><br>
+									@for($i=1;$i<32;$i++)
+									<span class="bg-primary rounded text-center text-white date_back">
+										{{ $i }}
+									</span>
+										
+									@endfor
+								</div>
+								
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="">Tải lên ảnh chụp xe</label><br>
+								<i class="text-danger">Giúp quảng bá xe của bạn tốt hơn</i><br>
+								<button type="button" onclick="changeMultiImage('tc-more-image')" class="btn btn-sm btn-warning">Tải lên</button>
+								<input type="file" hidden id="tc-more-image" name="more-image[]" multiple>
+								<div id="tc-more-image-box" class="rounded">
+									
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="">Mô tả dịch vụ xe</label>
+								<textarea name="description" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<button type="button" class="btn btn-sm btn-primary btn-submit">Xong</button>
+								<button type="button" class="btn btn-sm btn-danger float-right">Hủy</button>
+								
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-12">
-					<div class="form-group">
-						<button type="button" class="btn btn-sm btn-primary btn-submit">Xong</button>
-						<button type="button" class="btn btn-sm btn-danger float-right">Hủy</button>
-						
-					</div>
-				</div>
-
-			</div>
-		</form>
+				</form>
+            </div>
+        </div>
 	</div>
-		
-	{{-- google ads --}}
-		@include('frontend.layouts.partials.google-ads-1')
-	
-	{{-- end google ads --}}
+		@include('frontend.layouts.partials.google-ads-right')
 </div>
+	@include('frontend.layouts.partials.google-ads-bottom')
 </section>
 	
 @endsection
@@ -207,17 +348,28 @@
 				// console.log(image_files_arr);
 				// image_files_arr.splice(2,1);
 				// console.log(image_files_arr);
-	            readUrl(this,image_files);
+	            readUrl(this,image_files,'more-image-box');
 	            console.log(image_files);
 	        }
         });
-        function readUrl(input,filess){
-       		var j = 0;$("#more-image-box").html("");
+        $(document).on('change','#tc-more-image',function(e){
+			$("#tc-more-image-box").html("");
+			if (this.files) {
+				image_files = Array.from(this.files);
+				// console.log(image_files_arr);
+				// image_files_arr.splice(2,1);
+				// console.log(image_files_arr);
+	            readUrl(this,image_files,'tc-more-image-box');
+	            console.log(image_files);
+	        }
+        });
+        function readUrl(input,filess,more_image_box){
+       		var j = 0;$("#"+more_image_box).html("");
 	            var filesAmount = filess.length;
         	for (var i = 0; i < filesAmount; i++) {
                 var reader = new FileReader();
                 reader.onload = function(event) {
-            		$("#more-image-box").append(`
+            		$("#"+more_image_box).append(`
 	                	<span class="b-img-upload">
 	                    	<img src="`+event.target.result+`" class="more-image-upload"/>
 	                    	<span class="glyphicon glyphicon-remove text-center text-white remove-more-image" p="`+j+`">x</span>

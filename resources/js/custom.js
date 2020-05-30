@@ -86,3 +86,14 @@ function disabledLoader(){
 	$('.content-body').css('opacity', '1');
 	$(".loader").hide();
 }
+function isNumberKey(evt){
+  var charCode = (evt.which) ? evt.which : event.keyCode
+  if (charCode > 31 && (charCode < 48 || charCode > 57))
+      return false;
+  return true;
+}
+function countCharacter(that)
+{
+    var count = $(that).val().trim().length;
+    $(that).siblings('.count').text(count);
+}

@@ -9,7 +9,7 @@
 @section('content')
 
 {{-- google ads --}}
-@include('frontend.layouts.partials.google-ads-2')
+@include('frontend.layouts.partials.google-ads-top')
 {{-- end google ads --}}
 </section>
 {{--include search bar --}}
@@ -17,7 +17,7 @@
 {{--end include search bar --}}
 <div class="row mt-5" style="margin-right: 0px;margin-left: 0px">
 	{{-- google ads --}}
-	@include('frontend.layouts.partials.google-ads-1')
+	@include('frontend.layouts.partials.google-ads-left')
 	{{-- end google ads --}}
 	<div class="col-md-8 mx-0 px-0">
 
@@ -39,13 +39,13 @@
 					<td class="text-capitalize">{{ $car->station_go.'-'.$car->station_back }}</td>
 					<td class="text-center star-box">
 						@for($i=1;$i<6;$i++)
-						    @if($i>$car->stars)
-						        <i class="fa d-star fa-star-o" aria-hidden="true"></i>
-						    @else
-						        <i class="fa d-star fa-star star" aria-hidden="true"></i>
-						    @endif
-
-					    @endfor
+                            @if($i > intval($car->stars) )
+                                <span style="position: relative;">
+                                    <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star star" style="position: absolute;width: {{ (($car->stars)-intval($car->stars))*100 }}%;top: 0px;left: 0px;overflow: hidden" aria-hidden="true"></i></span>
+                            @else
+                                <i class="fa fa-star star" aria-hidden="true"></i>
+                            @endif
+                        @endfor
 					</td>
 					<td>
 						@php
@@ -65,11 +65,9 @@
                     </nav>
                 </div>
 	</div>
-	{{-- google ads --}}
-	@include('frontend.layouts.partials.google-ads-1')
-	{{-- end google ads --}}
+	@include('frontend.layouts.partials.google-ads-right')
 </div>
-	
+	@include('frontend.layouts.partials.google-ads-bottom')
 @endsection
 @routes
 @section('script')

@@ -1175,7 +1175,7 @@ button.button-style-w3 {
 
 p.dont-do a:hover,
 .text-style-w3ls:hover {
-    color: #fff;
+    /*color: #fff;*/
 }
 
 /* //login */

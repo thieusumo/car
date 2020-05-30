@@ -17,15 +17,32 @@
                     <label class="">Mật Khẩu</label>
                     <input type="password" class="form-control" name="customer[password]" required>
                 </div>
-                <button type="submit" class="btn button-style-w3">ĐĂNG NHẬP</button>
                 <div class="row sub-w3l mt-3 mb-2">
                     <div class="col-sm-6 sub-w3layouts_hub">
-                        <input type="checkbox" id="brand1" value="">
-                        <label for="brand1" class="text-style-w3ls">
+                        <input type="checkbox" id="remember_me" name="remember_me" value="">
+                        <label for="remember_me" class="text-style-w3ls">
                             <span></span>Ghi nhớ đăng nhập?</label>
                     </div>
                     <div class="col-sm-6 forgot-w3l text-sm-right">
-                        <a href="#" class="text-style-w3ls">Quên mật khẩu?</a>
+                        {{-- <a href="#" class="text-style-w3ls">Quên mật khẩu?</a> --}}
+                    </div>
+                </div>
+                <button type="submit" class="btn button-style-w3">ĐĂNG NHẬP</button>
+               
+                <div class="text-center">
+                    ---Hoặc đăng nhập bằng---
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <a href="{{ route('customer.socialite','facebook') }}" title="">
+                            <button type="button" class="btn button-style-w3" style="background-color: blue;color: white">Facebook</button>
+                        </a>
+                        
+                    </div>
+                    <div class="col-6">
+                        <a href="{{ route('customer.socialite','google') }}" _blank='top' title="">
+                            <button type="button" class="btn button-style-w3" style="background-color: red;color: white">Google<sup>+</sup></button>
+                        </a>
                     </div>
                 </div>
                 <p class="text-center dont-do text-style-w3ls">Bạn chưa có tài khoản?

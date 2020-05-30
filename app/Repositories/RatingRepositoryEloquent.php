@@ -95,4 +95,15 @@ class RatingRepositoryEloquent extends BaseRepository implements RatingRepositor
         }
         return $data;
     }
+    public function listStar(array $input)
+    {
+        $commnet_list = $this->model->where(['car_id'=>$input['id'],'active'=>1])->get();
+        $data['all'] = $commnet_list;
+        $data['star_5'] = $this->model->where(['car_id'=>$input['id'],'active'=>1,'star'=>5])->get();
+        $data['star_4'] = $this->model->where(['car_id'=>$input['id'],'active'=>1,'star'=>4])->get();
+        $data['star_3'] = $this->model->where(['car_id'=>$input['id'],'active'=>1,'star'=>3])->get();
+        $data['star_2'] = $this->model->where(['car_id'=>$input['id'],'active'=>1,'star'=>2])->get();
+        $data['star_1'] = $this->model->where(['car_id'=>$input['id'],'active'=>1,'star'=>1])->get();
+        return $data;
+    }
 }

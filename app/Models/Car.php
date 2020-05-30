@@ -15,7 +15,10 @@ class Car extends Model
     	'phone','address',
     	'active',
         'car_type',
-        'stars', 'total_star'
+        'stars', 'total_star',
+        'customer_id',
+        'license_plate', //Biển số
+        'description'
     ];
 
     public function scopeActive($query){
@@ -26,5 +29,9 @@ class Car extends Model
     }
     public function getRoute(){
         return $this->belongsTo(Route::class,'route_id','id');
+    }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class,'customer_id','id');
     }
 }
