@@ -102,7 +102,6 @@ $(".sub-cmt").click(function(){
 				$("#u-cmt").val("");
 				location.reload();
 			}
-			console.log(data);
 		});
 	}
 });
@@ -114,7 +113,7 @@ $(".sub-que").click(function(){
 		return;
 	}else{
 		$.ajax({
-			url:route('frontend.customer.send_question'),
+			url: route('frontend.customer.question.send'),
 			type: 'POST',
 			dataType: 'html',
 			data: {
@@ -129,7 +128,6 @@ $(".sub-que").click(function(){
 			if(data.status == 'success'){
 				$("input[name=ques]").val("");
 			}
-			console.log(data);
 		})
 		.fail(function() {
 			$.notify('Lỗi. Vui lòng thử lại sau!',{type:'danger'});

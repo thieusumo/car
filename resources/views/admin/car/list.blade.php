@@ -1,5 +1,8 @@
-@extends('layouts.app', ['pageSlug' => 'dashboard'])
-
+@extends('layouts.app',['page' => __('Car Management'), 'pageSlug' => 'car_management'])
+@section('style')
+    <style>
+    </style>
+@endsection
 @section('content')
 {{-- MODAL IMPORT DATA --}}
 <div class="modal fade" id="import-car-modal">
@@ -34,7 +37,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            <h4 class="card-title">{{ __('Users') }}</h4>
+                            <h4 class="card-title">{{ __('Cars') }}</h4>
                         </div>
                         <div class="col-4 text-right">
                             <a href="{{ route('car.create') }}" class="btn btn-sm btn-info">{{ __('Add car') }}</a>
@@ -48,54 +51,81 @@
                     <div class="">
                         <table class="table tablesorter w-100" id="car-table">
                             <thead class=" text-primary">
+                                <th scope="col">{{ __('ID') }}</th>
                                 <th scope="col">{{ __('Name') }}</th>
-                                <th scope="col">{{ __('Email') }}</th>
-                                <th scope="col">{{ __('Creation Date') }}</th>
-                                <th scope="col"></th>
+                                <th scope="col">{{ __('License Plate') }}</th>
+                                <th scope="col">{{ __('Route') }}</th>
+                                <th scope="col">{{ __('Phone') }}</th>
+                                <th scope="col">{{ __('Active') }}</th>
+                                <th scope="col">{{ __('Action') }}</th>
                             </thead>
                         </table>
                     </div>
                 </div>
-                {{-- <div class="card-footer py-4">
-                    <nav class="d-flex justify-content-end" aria-label="...">
-                        {{ $car_list->links() }}
-                    </nav>
-                </div> --}}
             </div>
         </div>
     </div>
 @endsection
 @push('js')
+@routes
 <script>
 	$(document).ready(function(){
         
 		oTable = $('#car-table').DataTable({
-                // paging: false,
-                // searching: false,
-                // bDestroy: true,
-                processing: true,
-                serverSide: true,
-                autoWidth: true,
-                
-                order: [[ 0, "desc" ]],
-                ajax:{ url:"{{ route('car.datatable') }}",
-                    data: function (d) {
-                           // d.search_customer_date = $('input[name=search_customer_date]').val();
-                           // d.group_select = $('#customertag_dropdown :selected').val();
-                       }
-                     },
-                    columns: [
-                             { data: 'name', name: 'name' },
-                             { data: 'phone', name: 'phone' },
-                             { data: 'line', name: 'line' },
-
-                          ],
+            // paging: false,
+            // searching: false,
+            // bDestroy: true,
+            processing: true,
+            serverSide: true,
+            autoWidth: true,
+            
+            order: [[ 0, "desc" ]],
+            ajax:{ url:"{{ route('car.datatable') }}",
+                data: function (d) {
+                       // d.search_customer_date = $('input[name=search_customer_date]').val();
+                       // d.group_select = $('#customertag_dropdown :selected').val();
+                   }
+                 },
+                columns: [
+                    { data: 'id', name: 'id', class:'text-center'},
+                    { data: 'name', name: 'name' },
+                    { data: 'license_plate', name: 'license_plate', class:'text-center'},
+                    { data: 'route_id', name: 'route_id'},
+                    // { data: 'car_type',name: 'car_type'},
+                    { data: 'phone', name: 'phone' },
+                    { data: 'active',name: 'active', class:'text-center'},
+                    { data: 'action',name: 'action', class:'text-center'},
+                ],
           });
+
         $(".import-car").click(function(){
             $("#import-car-modal").modal('show');
         });
-
+        $(document).on('click','.active', function(){
+            var active = $(this).siblings('span').attr('a');
+            var id = $(this).parents('tr').children('td').eq(0).text();
+            $.ajax({
+                url: route('car.update',id),
+                type: 'PATCH',
+                dataType: 'json',
+                data: {
+                    ajax: 1,
+                    active: active==1?0:1,
+                    _token: $('meta[name=csrf-token]').attr('content')
+                },
+            })
+            .done(function(data) {
+                $.notify(data.message, {type: data.status});
+            })
+            .fail(function() {
+                $.notify('Error', {type: 'danger'});
+            })
+            .always(function() {
+                oTable.draw();
+            });
+        });
 	});
+
     function ChooseFile(){
         $("#file").click();
     }
@@ -133,7 +163,6 @@
             $("#import-form")[0].reset();
             $("#file_name").text("");
         }
-        
     });
         
 </script>

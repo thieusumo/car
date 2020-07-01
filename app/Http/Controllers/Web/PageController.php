@@ -11,20 +11,24 @@ use DataTables;
 use App\Models\Rating;
 use App\Repositories\QuestionRepository;
 use App\Repositories\RatingRepository;
+use App\Repositories\CarFileRepository;
 
 
 class PageController extends Controller
 {
     protected $question;
     protected $rating;
+    protected $car_file;
 
     public function __construct(
         QuestionRepository $question,
-        RatingRepository $rating
+        RatingRepository $rating,
+        CarFileRepository $car_file
     )
     {
         $this->question = $question;
         $this->rating = $rating;
+        $this->car_file = $car_file;
     }
     public function index(){
         $cars = Car::join('route',function($join){
@@ -69,6 +73,7 @@ class PageController extends Controller
                 $data['comment_list'] = $this->rating->getAll($input,10);
                 $data['question'] = $this->question->activeQuestion($input,5);
                 $data['rating_percent'] = $this->rating->percentStar($input);
+                $data['car_file'] = $data['car']->files;
                 
                 return view('frontend.car.car-detail',$data);
             }
@@ -90,10 +95,12 @@ class PageController extends Controller
                 if($car_info->count() == 0)
                     abort(404);
                 $data['car'] = $car_info->first();
+                $data['times'] = $data['car']->times;
                 $input['id'] = $data['car']->id;
                 $data['comment_list'] = $this->rating->getAll($input,10);
                 $data['question'] = $this->question->activeQuestion($input,5);
                 $data['rating_percent'] = $this->rating->percentStar($input);
+                $data['car_file'] = $data['car']->files;
 
                 return view('frontend.car.car-detail',$data);
             }

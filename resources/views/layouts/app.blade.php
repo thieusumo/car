@@ -15,11 +15,13 @@
         {{-- <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
         <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"> --}}
         <!-- Icons -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('black/css/style.css') }}">
         <link href="{{ asset('black') }}/css/nucleo-icons.css" rel="stylesheet" />
         <!-- CSS -->
         <link href="{{ asset('black') }}/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
         <link href="{{ asset('black') }}/css/theme.css" rel="stylesheet" />
         <link rel="stylesheet" type="{{ asset('css/app.css') }}" href="">
+        @yield('style')
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
@@ -105,6 +107,7 @@
 
         <script src="{{ asset('black') }}/js/black-dashboard.min.js?v=1.0.0"></script>
         <script src="{{ asset('black') }}/js/theme.js"></script>
+        <script src="{{ asset('js/custom.js') }}" type="text/javascript" charset="utf-8"></script>
         
 
         <script>

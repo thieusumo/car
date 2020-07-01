@@ -298,14 +298,14 @@ textarea {
   resize: vertical;
 }
 
-fieldset {
+/*fieldset {
   min-width: 0;
   padding: 0;
   margin: 0;
   border: 0;
-}
+}*/
 
-legend {
+/*legend {
   display: block;
   width: 100%;
   max-width: 100%;
@@ -315,7 +315,7 @@ legend {
   line-height: inherit;
   color: inherit;
   white-space: normal;
-}
+}*/
 
 progress {
   vertical-align: baseline;
@@ -8972,4 +8972,3 @@ a.text-dark:hover, a.text-dark:focus {
     border: 1px solid #ddd !important;
   }
 }
-/*# sourceMappingURL=bootstrap.css.map */

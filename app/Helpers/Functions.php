@@ -26,3 +26,23 @@ function shorterString($string,$number){
 		
 	return $new_string;
 }
+
+function shortStringMessage($str)
+{
+	$cmts = explode(' ', $str);
+	$max_key = count($cmts);
+	$string = "";
+
+	if($max_key < 5){
+		return $str;
+	}else{
+		foreach($cmts as $key => $cmt){
+			
+				$string .= $cmt. " ";
+
+			if($key > 5) break;
+		}
+		return $string;
+	}
+
+}

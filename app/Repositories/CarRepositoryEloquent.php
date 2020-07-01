@@ -36,7 +36,35 @@ class CarRepositoryEloquent extends BaseRepository implements CarRepository
     }
     public function getOne($id)
     {
-        $car = $this->model->find($id);
+        $car = $this->model->with('files')->find($id);
         return $car;
+    }
+    public function store(array $input)
+    {
+        $input['active'] = $input['active'] ?? 1;
+        $result = $this->model->create($input);
+        return $result;
+    }
+    //Check cars in route
+    public function carInRoute($route_id)
+    {
+        $car = $this->model->where('route_id',$route_id)->get();
+        return $car;
+    }
+    public function getAll()
+    {
+        $result = $this->model
+                ->with('getTypeCar')
+                ->with('getRoute')
+                ->with('customer')
+                ->latest()
+                ->get();
+
+        return $result;
+    }
+    public function update(array $input, $id)
+    {
+        $result = $this->model->find($id)->update($input);
+        return $result;
     }
 }

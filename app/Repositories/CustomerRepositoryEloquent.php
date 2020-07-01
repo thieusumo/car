@@ -41,5 +41,10 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
 
         return $customer;
     }
+    public function getOne(array $input)
+    {
+        $result = $this->model->where($input)->get();
+        return $result;
+    }
     
 }

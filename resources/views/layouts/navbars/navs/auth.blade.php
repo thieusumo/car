@@ -23,27 +23,39 @@
                     </button>
                 </li>
                 <li class="dropdown nav-item">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <div class="notification d-none d-lg-block d-xl-block"></div>
-                        <i class="tim-icons icon-sound-wave"></i>
+                    <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        {{-- <div class="notification d-none d-lg-block d-xl-block"></div> --}}
+                        @php
+                            $questions_nav = \App\Models\Question::countQuestionAdmin();
+                        @endphp
+                        <i class="tim-icons icon-email-85"><sup class="text-danger">({{ $questions_nav->count() ?? 'Error' }})</sup></i>
                         <p class="d-lg-none"> {{ __('Notifications') }} </p>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-navbar" style="max-height: 40vh;overflow: auto">
+                        @if($questions_nav)
+                        @foreach($questions_nav as $q )
                         <li class="nav-link">
-                            <a href="#" class="nav-item dropdown-item">{{ __('Mike John responded to your email') }}</a>
+                            <a href="{{ route('fronted.message.index',$q->car_id) }}" class="nav-item dropdown-item"> - {!! __(shorterString($q->question,10)) !!}</a>
                         </li>
+                        @endforeach
+                        @endif
+                    </ul>
+                </li>
+                @php
+                    $notification_nav = \App\Models\Notification::countNotificationAdmin();
+                @endphp
+                <li class="dropdown nav-item">
+                    <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        {{-- <div class="notification d-none d-lg-block d-xl-block"></div> --}}
+                        <i class="tim-icons icon-sound-wave"><sup class="text-danger">({{ $notification_nav->count() ?? 'error' }})</sup></i>
+                        <p class="d-lg-none"> {{ __('Notifications') }} </p>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-navbar" style="max-height: 40vh;overflow: auto">
+                        @foreach($notification_nav as $n)
                         <li class="nav-link">
-                            <a href="#" class="nav-item dropdown-item">{{ __('You have 5 more tasks') }}</a>
+                            <a href="#" class="nav-item dropdown-item">{{ __( shorterString($n->content,10)) }}</a>
                         </li>
-                        <li class="nav-link">
-                            <a href="#" class="nav-item dropdown-item">{{ __('Your friend Michael is in town') }}</a>
-                        </li>
-                        <li class="nav-link">
-                            <a href="#" class="nav-item dropdown-item">{{ __('Another notification') }}</a>
-                        </li>
-                        <li class="nav-link">
-                            <a href="#" class="nav-item dropdown-item">{{ __('Another one') }}</a>
-                        </li>
+                        @endforeach
                     </ul>
                 </li>
                 <li class="dropdown nav-item">

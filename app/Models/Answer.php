@@ -11,8 +11,8 @@ class Answer extends Model
     	'customer_id', 'question_id', 'answer'
     ];
 
-    public function getUpdatedAtAttribute($date)
-    {
-    	return \Carbon\Carbon::parse($date)->format('m/d/Y');
-    }
+    // public function getUpdatedAtAttribute($date)
+    // {
+    // 	return \Carbon\Carbon::parse($date)->format('m/d/Y');
+    // }
 }

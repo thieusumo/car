@@ -46,6 +46,11 @@ class QuestionRepositoryEloquent extends BaseRepository implements QuestionRepos
         $data['total'] = $questions->count();
         return $data;
     }
+    public function notActiveQuestion($car_id)
+    {
+        $result = $this->model->where('car_id',$car_id)->where('active',0)->get();
+        return $result;
+    }
     public function store(array $input){
         $input['customer_id'] = Auth::guard('customer')->user()->id;
         $input['active'] = 0;
@@ -53,6 +58,16 @@ class QuestionRepositoryEloquent extends BaseRepository implements QuestionRepos
         $result = $this->model->create($input);
 
         return $result;
+    }
+    public function allQuestion($car_id)
+    {
+        $result = $this->model->where('car_id',$car_id)->with('answer')->with('questioner')->latest()->get();
+        return $result;
+    }
+    public function changeStatus($car_id)
+    {
+        $question = $this->model->where('car_id',$car_id)->update(['active'=>1]);
+        return $question;
     }
     
 }

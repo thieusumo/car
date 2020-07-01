@@ -18,7 +18,8 @@
     <!-- Style-CSS -->
     <link href="{{ asset('web/css/font-awesome.min.css')}}" rel="stylesheet">
 
-    <link rel="stylesheet" type="{{ asset('css/app.css') }}" href="">
+    <link rel="stylesheet" type="" href="{{ asset('css/app.css') }}">
+    <meta name="name" content="{{ csrf_token() }}">
     <!-- Font-Awesome-Icons-CSS -->
     <!-- //Custom-Files -->
 
@@ -37,8 +38,6 @@
 
 <body>
     <div id="fb-root"></div>
-
-
     @include('frontend.layouts.partials.login-modal')
     @include('frontend.layouts.partials.register-modal')
 
@@ -59,6 +58,7 @@
 <script src="{{ asset('js/custom.js') }}" type="text/javascript" charset="utf-8"></script>
 
 @yield('script')
+<script src="{{ asset('web/js/socket.js') }}" type="text/javascript" charset="utf-8"></script>
 <script>
     function showModal(modal_id,hidden_id=""){
         $("#"+modal_id).modal({backdrop: "static"});
@@ -88,12 +88,21 @@
         }
         @if(session('error_login'))
             displayModal('loginModal');
+            @php
+                session()->forget('error_login');
+            @endphp
         @endif
 
         @if(session('danger'))
            $.notify('{{session('danger')}}',{type:'danger'});
+            @php
+                session()->forget('danger');
+            @endphp
         @elseif(session('success'))
             $.notify('{{session('success')}}',{type:'success'});
+            @php
+                session()->forget('success');
+            @endphp
         @endif
 
         function displayModal(id_modal){

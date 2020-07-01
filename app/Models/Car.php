@@ -8,7 +8,7 @@ class Car extends Model
 {
     protected $table = 'cars';
     protected $fillable = [
-    	'name', 'slug', 
+    	'name', 'slug', 'ava',
         'station_go', 'station_back',
     	'time_go','time_back',
     	'route_id','line',
@@ -33,5 +33,18 @@ class Car extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class,'customer_id','id');
+    }
+    public function files()
+    {
+        return $this->hasMany(CarFile::class,'car_id','id');
+    }
+    public function times()
+    {
+        return $this->hasMany(Time::class,'car_id','id');
+    }
+    public function setNameAttribute($name)
+    {
+        $this->attributes['name'] = $name;
+        $this->attributes['slug'] = str_slug($name);
     }
 }

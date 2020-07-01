@@ -24,7 +24,7 @@
                             </div>
                             <div class="col-lg-6 con-right">
                                 <div class="form-group">
-                                    <input class="form-control c_phone" type="text" onkeypress="return isNumberKey(event)" name="phone" placeholder="Số điện thoại" value="{{ old('phone') }}" required="">
+                                    <input class="form-control c_phone" type="number" onkeypress="return isNumberKey(event)" name="phone" placeholder="Số điện thoại" value="{{ old('phone') }}" required="">
                                 </div>
                             </div>
                         </div>

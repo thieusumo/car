@@ -12,4 +12,9 @@ class Route extends Model
     public function scopeActive($query){
     	return $query->where('active',1);
     }
+    public function setNameAttribute($name)
+    {
+    	$this->attributes['name'] = $name;
+    	$this->attributes['route'] = str_slug($name);
+    }
 }

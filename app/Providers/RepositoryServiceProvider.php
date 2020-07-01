@@ -20,6 +20,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\ReportRepository::class,\App\Repositories\ReportRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\ContactRepository::class,\App\Repositories\ContactRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\NotificationRepository::class,\App\Repositories\NotificationRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\CarFileRepository::class,\App\Repositories\CarFileRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\TimeRepository::class,\App\Repositories\TimeRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\AnswerRepository::class,\App\Repositories\AnswerRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\RouteRepository::class,\App\Repositories\RouteRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\ChatRepository::class,\App\Repositories\ChatRepositoryEloquent::class);
     }
 
     /**

@@ -12,4 +12,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface CustomerRepository extends RepositoryInterface
 {
     public function store(array $input);
+    public function getOne(array $input);
 }

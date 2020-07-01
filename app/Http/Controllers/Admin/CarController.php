@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Repositories\CarRepository;
+use App\Repositories\RouteRepository;
 use App\Models\Car;
 use Excel;
 use DataTables;
@@ -12,6 +14,16 @@ use Response;
 
 class CarController extends Controller
 {
+    protected $car;
+    protected $route;
+
+    public function __construct(
+        CarRepository $car,
+        RouteRepository $route
+    ){
+        $this->car = $car;
+        $this->route = $route;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +31,7 @@ class CarController extends Controller
      */
     public function index(Car $model)
     {
-        $data['car_list'] = $model->active()->paginate(1);
-        return view('admin.car.list',$data);
+        return view('admin.car.list');
     }
 
     /**
@@ -63,7 +74,14 @@ class CarController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['cars'] = $this->car->getOne($id);
+
+        if(!$data['cars'])
+            aort(404);
+
+        $data['routes'] = $this->route->listActive();
+
+        return view('admin.car.edit',$data);
     }
 
     /**
@@ -75,7 +93,26 @@ class CarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+
+        if($request->has('phone')){
+            $input['phone'] = implode(';', $request->phone);
+
+        }
+        try{
+            $this->car->update($input,$id);
+            if($request->has('ajax'))
+                return response(['status'=>'success','message'=>'Successfully!']);
+            else
+                return redirect()->route('car.index')->withStatus(__('Car successfully updated.'));
+
+        }catch(\Exception $e){
+            \Log::info($e);
+            if($request->has('ajax'))
+                return response(['status'=>'danger','message'=>'Error!']);
+            else
+                return back()->withStatus(__('Car failed updated.'));
+        }
     }
 
     /**
@@ -90,9 +127,32 @@ class CarController extends Controller
     }
     public function datatable(Request $request){
         
-        $car_list = Car::all();
+        $car_list = $this->car->getAll();
 
         return DataTables::of($car_list)
+            ->editColumn('route_id', function($row){
+                return $row->getRoute->name ?? $row->getTypeCar->name;
+            })
+            ->editColumn('phone', function($row){
+                $phone_str = '';
+                foreach(explode(';', $row->phone) as $phone){
+                    $phone_str .= '<p>'.$phone.'</p>';
+                }
+                return $phone_str;
+            })
+            ->editColumn('active', function($row){
+                $check = $row->active == 1 ? "checked" : "";
+                return '<label class="switch">
+                            <input type="checkbox" class="active primary"'.$check.'>
+                            <span class="slider round" a="'.$row->active.'"></span>
+                        </label>';
+            })
+            ->addColumn('action', function($row){
+                return '<a href="'.route('car.edit',$row->id).'" class="btn-edit text-info" title=""><i class="tim-icons icon-pencil"></i></a>
+                    <a href="'.route('images.show',$row->id).'" class="btn-delete ml-1 text-success" title="View Images"><i class="tim-icons icon-image-02"><sup class="text-white">('.$row->files->count().')</sup></i></a>
+                    <a href="javascript:void(0)" class="btn-delete ml-1 text-danger" title=""><i class="tim-icons icon-trash-simple"></i></a>';
+            })
+            ->rawColumns(['action','active','phone'])
             ->make(true);
     }
     public function getDownload()

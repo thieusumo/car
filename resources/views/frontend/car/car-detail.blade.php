@@ -15,10 +15,15 @@
 	<div class="col-md-8 content-detail">
 		<div class="row detail-content">
 			<div class="col-md-6 col-sm-12 text-center">
-				<img src="{{ asset('web/images/nhuy_1.jpg') }}" class="w-100 " alt="">
+				<img src="{{ asset($car->ava ?? 'web/images/ava-default.jpg') }}" class="w-100 mb-1" alt="">
+				@php
+					// $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+					$actual_link = 'https://www.facebook.com/thieu.100/';
+				@endphp
+				<div class="fb-share-button float-left" data-href="{{ $actual_link }}" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ str_replace(':','%3A',str_replace('/','%2F',$actual_link)) }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
 			</div>
 			<div class="col-md-6 col-sm-12">
-				<h4>{{ $car->name }}</h4><span hidden id="c-id">{{ $car->id }}</span>
+				<h4>Nhà xe {{ $car->name }}</h4><span hidden id="c-id">{{ $car->id }}</span>
 				<p>
 					@for($i=1;$i<6;$i++)
 					    @if($i > intval($car->stars) )
@@ -37,13 +42,49 @@
 					</span>
 				</p>
 				<p>Tuyến: <b>{{ $name }}</b></p>
-				<p>Lộ Trình: <b>{{ $car->line }}</b></p>
-				<p>Xuất Bến: <b>{{ $car->station_go }}: {{ $car->time_go }} - {{ $car->station_back }}: {{ $car->time_back }}</b></p>
-				<p>Ngày Đi: <b>Tất Cả Các Ngày</b></p>
+				@if($car->car_type == 1)
+					<p>Lộ Trình: <b>{{ $car->line }}</b></p>
+					<p>Xuất Bến: <b>{{ $car->station_go }}: {{ $car->time_go }} - {{ $car->station_back }}: {{ $car->time_back }}</b></p>
+					<fieldset class="rounded">
+						<legend>Thời gian đi:</legend>
+						<p>Giờ đi: <b>{{ \Carbon\Carbon::parse($times->first()->go)->format('H:i') }}</b></p>
+						<p>Ngày Đi:
+							@if($times->count() == 31)
+								<b>Tất cả các ngày</b>
+							@else
+								@foreach($times as $time)
+								<b>{{ \Carbon\Carbon::parse($time->go)->format('d') }}</b> - 
+								@endforeach
+							@endif
+						</p>
+					</fieldset>
+					<fieldset class="rounded">
+						<legend>Thời gian về:</legend>
+						<p>Giờ về: <b>{{ \Carbon\Carbon::parse($times->first()->back)->format('H:i') }}</b></p>
+						<p>Ngày Về:
+							@if($times->count() == 31)
+								<b>Tất cả các ngày</b>
+							@else
+								@foreach($times as $time)
+								<b>{{ \Carbon\Carbon::parse($time->back)->format('d') }}</b> - 
+								@endforeach
+							@endif
+						</p>
+							
+					</fieldset>
+					@if($car->description != "")
+					<p>Thông tin thêm: <b>{{ $car->description }}</b></p>
+					@endif
+				@else
+					<p>Địa chỉ: <b>{{ $car->address }}</b></p>
+					<p>Dịch vụ: <b>{{ $car->description }}</b></p>
+				@endif
 				<p>Liên Hệ:
 					<div>
 						@foreach(explode(';',$car->phone) as $phone)
-							{{ $phone }}
+							@if($phone != "")
+								<p style="text-indent: 10px"><b>{{ $phone }}</b></p>
+							@endif
 						@endforeach
 					</div>
 				</p>
@@ -51,71 +92,44 @@
 					<i class="fa fa-comment" aria-hidden="true"></i>
 						Phản ánh thông tin nhà xe không chính xác
 				</p>
-				@php
-					// $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-					$actual_link = 'https://www.facebook.com/thieu.100/';
-				@endphp
-
-				<div class="fb-share-button" data-href="https://stackoverflow.com/questions/22037021/custom-facebook-share-button" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F22037021%2Fcustom-facebook-share-button&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
-
-				<div class="fb-share-button" data-href="{{ $actual_link }}" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ str_replace(':','%3A',str_replace('/','%2F',$actual_link)) }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
+				<button type="button" class="btn btn-sm btn-info"><a href="{{ route('frontend.chating',$car->customer->id) }}" class="text-white" title=""><i class="fa fa-envelope"></i> Nhắn tin</a></button>
 			</div>
 		</div>
-		<h5 class="title-content">Một số hình ảnh nhà xe</h5>
+		<h5 class="title-content">Một số hình ảnh nhà xe<sup class="text-danger">({{ $car_file->count() }})</sup></h5>
 		<div class="detail-content">
-			<div id="demo" class="carousel slide" data-ride="carousel">
+			<div id="car_files" class="carousel slide" data-ride="carousel">
 		  
 		  @php
-		  	$count = 9;
+		  	$count = $car_file->count();
+		  	$stt = 0;
 		  @endphp
 		  <!-- The slideshow -->
 		  <div class="carousel-inner box-more-image">
-		    <div class="carousel-item col-md-12 active">
+		  	@foreach($car_file->chunk(3) as $key => $files)
+		  	@if($key == 0)
+		    	<div class="carousel-item col-md-12 active">
+		    @else
+		    	<div class="carousel-item col-md-12">
+		    @endif
 		    	<div class="row">
+		    		@foreach($files as $file)
 		    		<div class="col-4 px-1 contain-image">
-			    		<img src="{{ asset('web/images/bg.jpg') }}" id="img-0" pos="0" alt="Los Angeles" class="more-image">
+			    		<img src="{{ asset($file->image_src) }}" id="img-{{ $stt }}" pos="{{ $stt }}" alt="Los Angeles" class="more-image">
 			    	</div>
-			    	<div class="col-4 px-1 contain-image">
-			    		<img src="{{ asset('web/images/9.jpg') }}" id="img-1" pos="1" alt="Los Angeles" class="more-image">
-			    	</div>
-			    	<div class="col-4 px-1 contain-image">
-			    		<img src="{{ asset('web/images/404.jpg') }}" pos="2" id="img-2" alt="Los Angeles" class="more-image">
-			    	</div>
+			    	@php
+			    		$stt++;
+			    	@endphp
+			    	@endforeach
 		    	</div>
 		    </div>
-		    <div class="carousel-item">
-		    	<div class="row">
-		    		<div class="col-4 px-1 contain-image">
-			    		<img src="{{ asset('web/images/ava.jpg') }}" pos="3" id="img-3" alt="Los Angeles" class="more-image">
-			    	</div>
-			    	<div class="col-4 px-1 contain-image">
-			    		<img src="{{ asset('web/images/nhuy_2.png') }}" pos="4" id="img-4" alt="Los Angeles" class="more-image">
-			    	</div>
-			    	<div class="col-4 px-1 contain-image">
-			    		<img src="{{ asset('web/images/404.png') }}" id="img-5" pos="5" alt="Los Angeles" class="more-image">
-			    	</div>
-		    	</div>
-		    </div>
-		    <div class="carousel-item">
-		        <div class="row">
-		    		<div class="col-4 px-1 contain-image">
-			    		<img src="{{ asset('web/images/nhuy_1.jpg') }}" pos="6" id="img-6" alt="Los Angeles" class="more-image">
-			    	</div>
-			    	<div class="col-4 px-1 contain-image">
-			    		<img src="{{ asset('web/images/nhuy_3.jpg') }}" id="img-7" pos="7" alt="Los Angeles" class="more-image">
-			    	</div>
-			    	<div class="col-4 px-1 contain-image">
-			    		<img src="{{ asset('web/images/nhuy_4.jpg') }}" id="img-8" pos="8" alt="Los Angeles" class="more-image">
-			    	</div>
-		    	</div>
-		    </div>
+		    @endforeach
 		  </div>
 		  
 		  <!-- Left and right controls -->
-		  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+		  <a class="carousel-control-prev" href="#car_files" data-slide="prev">
 		    <span class="carousel-control-prev-icon"></span>
 		  </a>
-		  <a class="carousel-control-next" href="#demo" data-slide="next">
+		  <a class="carousel-control-next" href="#car_files" data-slide="next">
 		    <span class="carousel-control-next-icon"></span>
 		  </a>
 		</div>
@@ -131,7 +145,7 @@
 							<span class="fa fa-hand-o-right text-primary"></span>
 							{!! shorterString($q->answer->answer,30) !!}
 						</p>
-						<i class="ans-content">Trả lời ngày {{ $q->answer->updated_at }}</i>
+						<i class="ans-content">Trả lời ngày {{ $q->answer->updated_at->format('m/d/Y') }}</i>
 					@endif
 				</div>
 			@endforeach

@@ -18,7 +18,7 @@
                     <b class="caret mt-1"></b>
                 </a>
 
-                <div class="collapse show" id="laravel-examples">
+                <div class="collapse" id="laravel-examples">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile') class="active " @endif>
                             <a href="{{ route('profile.edit')  }}">
@@ -34,6 +34,42 @@
                         </li>
                     </ul>
                 </div>
+            </li>
+            <li>
+                <a data-toggle="collapse" href="#car_management" aria-expanded="true">
+                    <i class="fab fa-laravel" ></i>
+                    <span class="nav-link-text" >{{ __('Cars') }}</span>
+                    <b class="caret mt-1"></b>
+                </a>
+
+                <div class="collapse @if($pageSlug == 'image_management' || $pageSlug == 'car_management' || $pageSlug == 'car_edit') show @endif" id="car_management">
+                    <ul class="nav pl-4">
+                        <li @if ($pageSlug == 'car_management') class="active " @endif>
+                            <a href="{{ route('car.index')  }}">
+                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <p>{{ __('Car Management') }}</p>
+                            </a>
+                        </li>
+                        <li >
+                            <a href="{{ route('car.index')  }}">
+                                <i class="tim-icons icon-bus-front-12"></i>
+                                <p>{{ __('Car Edit') }}</p>
+                            </a>
+                        </li>
+                        <li @if ($pageSlug == 'image_management') class="active " @endif>
+                            <a href="{{ route('car.index')  }}">
+                                <i class="tim-icons icon-image-02"></i>
+                                <p>{{ __('Image Management') }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li @if ($pageSlug == 'route_management') class="active " @endif>
+                <a href="{{ route('route.index') }}">
+                    <i class="tim-icons icon-sound-wave"></i>
+                    <p>{{ __('Route Management') }}</p>
+                </a>
             </li>
             <li @if ($pageSlug == 'icons') class="active " @endif>
                 <a href="{{ route('pages.icons') }}">

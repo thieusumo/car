@@ -23,4 +23,9 @@ class Customer extends Authenticatable
     public function setPasswordAttribute($password){
     	$this->attributes['password'] = Hash::make($password);
     }
+
+    public function cars()
+    {
+        return $this->hasMany(Car::class,'customer_id','id');
+    }
 }
