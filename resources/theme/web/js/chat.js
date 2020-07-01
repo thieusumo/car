@@ -3,8 +3,10 @@ $(function(){
 	var _token = $('meta[name=csrf-token]').attr('content');
 	var send_to = 0;
 	var ava_send = $("#ava-send").val();
+	var baseUrl = window.location.origin;
+	var port = 3000;
 	//Kết nối với server socket đang lắng nghe
-	var socket = io.connect('http://localhost:3000', {query : 'name='+name});
+	var socket = io.connect(baseUrl+":"+port, {query : 'name='+name});
 
 	//Socket nhận data và apppend vào giao diện
 	socket.on("send", function(data){
@@ -29,6 +31,12 @@ $(function(){
 		// 	$(this).find('user_info').children('p').text(data.message);
 		// }
 	})
+
+	if(r != 0 && s != 0){
+		name = s
+		send_to = r
+		getConvesation(name,send_to);
+	}
 
 	//Bắt sự kiện click gửi message
 	$(document).on('click','#sendMessage', function(){
