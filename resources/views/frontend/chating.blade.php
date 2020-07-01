@@ -31,7 +31,7 @@
 		<div class="container-fluid h-100">
 			<div class="row justify-content-center my-2">
 				<div class="col-md-4 col-sm-4 col-xl-3 text-left">
-					<span style="color: yellow;font-size: 28px;line-height: 35px" class="">XeCuaToi</span><span class="text-white">.info</span>
+					<span style="color: yellow;font-size: 28px;line-height: 35px" class="">otoNgay</span><span class="text-white">.com</span>
 					<input type="hidden" value="{{ $customer_composer->id }}" id="name" name="">
 					<input type="hidden" value="{{ asset($customer_composer->ava) }}" id="ava-send" name="">
 				</div>

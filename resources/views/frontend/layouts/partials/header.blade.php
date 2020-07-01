@@ -3,7 +3,7 @@
         <div class="header d-lg-flex justify-content-between align-items-center px-sm-2 px-1">
             <!-- logo -->
             <div id="logo">
-                <h1><a href="{{ route('home') }}">Xe</a></h1>
+                <h1><a href="{{ route('home') }}">otoNgay.com</a></h1>
             </div>
             <!-- //logo -->
             <!-- nav -->
